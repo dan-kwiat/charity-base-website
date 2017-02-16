@@ -1,8 +1,36 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Nav, NavItem } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+
+
+const Nav = (props) => {
+  const routes = [
+    {url: '/1', name: 'One'},
+    {url: '/2', name: 'Two'},
+    {url: '/3', name: 'Three'}
+  ]
+  return (
+    <ul className="nav nav-tabs">
+      {
+        routes.map((r, i) => {
+          return (
+            <li
+            key={i}
+            role="presentation"
+            className={r.url===props.activeUrl ? 'active' : ''}>
+              <Link to={r.url}>{r.name}</Link>
+            </li>
+          )
+        })
+      }
+    </ul>
+  )
+}
+
+Nav.propTypes = {
+  activeUrl: React.PropTypes.string
+}
 
 
 class App extends Component {
@@ -21,15 +49,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <div className="container">
-          <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-            <NavItem eventKey={1}><Link key={1} to={"/1"}>One</Link></NavItem>
-            <NavItem eventKey={2}><Link key={2} to={"/2"}>Two</Link></NavItem>
-            <NavItem eventKey={3}><Link key={3} to={"/3"}>Three</Link></NavItem>
-          </Nav>
+          <p className="App-intro">
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </p>
+          <Route path="/:filter?" render={({match}) => {
+            return <Nav activeUrl={match.url} />
+          }} />
         </div>
       </div>
     );
