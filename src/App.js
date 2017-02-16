@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Nav, NavItem } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 
 class App extends Component {
@@ -25,9 +26,9 @@ class App extends Component {
         </p>
         <div className="container">
           <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-            <NavItem eventKey={1}>One</NavItem>
-            <NavItem eventKey={2}>Two</NavItem>
-            <NavItem eventKey={3}>Three</NavItem>
+            <NavItem eventKey={1}><Link key={1} to={"/1"}>One</Link></NavItem>
+            <NavItem eventKey={2}><Link key={2} to={"/2"}>Two</Link></NavItem>
+            <NavItem eventKey={3}><Link key={3} to={"/3"}>Three</Link></NavItem>
           </Nav>
         </div>
       </div>
