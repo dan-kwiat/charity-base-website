@@ -25,6 +25,10 @@
 }
 
 
+code {
+  background-color: #333;
+}
+
 .filter-form {
   border-color: pink;
   border-style: solid;
@@ -33,7 +37,9 @@
   padding: 10px;
 }
 
-
+.filter-query {
+  color: pink;
+}
 
 
 
