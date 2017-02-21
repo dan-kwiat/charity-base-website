@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { Route, Link, Redirect } from 'react-router-dom';
-import { Nav } from './components';
+import { Route, Redirect } from 'react-router-dom';
+import { Nav, Charities } from './components';
 
 
 const GitHubFlag = () => {
@@ -16,48 +16,18 @@ const GitHubFlag = () => {
   )
 }
 
-class Charities extends Component {
-  state = {
-    charities: [{id:0, name:'c1'}, {id:1, name:'c2'}]
-  }
-  render() {
-    return (
-      <div>
-        <input />
-        {this.state.charities.map((x,i) => {
-          return (
-            <div key={i}>
-              <Link to={`/charities/${x.id}`}>{x.name}</Link>
-            </div>
-          )
-        })}
-        <Route path="/charities/:charityId" render={({match}) => {
-          const charity = this.state.charities.find(x => x.id===Number(match.params.charityId))
-          return (
-            <div>
-              <div>CharityId: {charity.id}</div>
-              <div>CharityName: {charity.name}</div>
-            </div>
-          )
-        }} />
-      </div>
-    )
-  }
-}
-
 
 const Director = ({url}) => {
   switch(url) {
     case '/':
       return (
         <div>
-          <Nav activeUrl={url} />
+          Home
         </div>
       )
     case '/charities':
       return (
         <div>
-          <Nav activeUrl={url} />
           <Charities />
         </div>
       )
@@ -67,31 +37,22 @@ const Director = ({url}) => {
 }
 
 
-class App extends Component {
-  state = {
-    activeKey: 1
-  }
-  handleSelect = (selectedKey) => {
-    this.setState({
-      activeKey: selectedKey
-    })
-  }
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>CharityBase<small>.uk</small></h2>
-          <p className="App-intro">
-            The API for charity data
-          </p>
-        </div>
-        <div className="container">
-          <Route path="/:filter?" render={({match}) => <Director {...match} />} />
-        </div>
-        <GitHubFlag />
+const App = () => {
+  return (
+    <div className="App">
+      <GitHubFlag />
+      <div className="App-header">
+        <h2>CharityBase<small>.uk</small></h2>
+        <p className="App-intro">
+          The API for charity data
+        </p>
       </div>
-    );
-  }
+      <div className="container">
+        <Nav />
+        <Route path="/:filter?" render={({match}) => <Director {...match} />} />
+      </div>
+    </div>
+  );
 }
 
 

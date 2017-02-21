@@ -26,3 +26,42 @@
 
 /* GitHubFlag animation: */
 .github-corner:hover .octo-arm {animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+
+/* Replicate bootstrap styles for nav <a> instead of <li> (to allow direct use of router NavLink) */
+.nav > a {
+  position: relative;
+  display: block;
+}
+.nav > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.nav > a:hover,
+.nav > a:focus {
+  text-decoration: none;
+  background-color: #eee;
+}
+.nav-tabs > a {
+  float: left;
+  margin-bottom: -1px;
+}
+.nav-tabs > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs > a:hover {
+  border-color: #eee #eee #ddd;
+}
+.nav-tabs > a.active,
+.nav-tabs > a.active:hover,
+.nav-tabs > a.active:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}

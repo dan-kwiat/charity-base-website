@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-export const Nav = (props) => {
+export const Nav = () => {
   const routes = [
     {url: '/', name: 'API'},
     {url: '/charities', name: 'Charities'},
@@ -11,21 +11,20 @@ export const Nav = (props) => {
   return (
     <ul className="nav nav-tabs">
       {
-        routes.map((r, i) => {
-          return (
-            <li
-            key={i}
-            role="presentation"
-            className={r.url===props.activeUrl ? 'active' : ''}>
-              <Link to={r.url}>{r.name}</Link>
-            </li>
-          )
-        })
+        routes.map((r, i) => (
+          <NavLink
+          key={i}
+          exact
+          to={r.url}
+          activeClassName="active"
+          >
+            {r.name}
+          </NavLink>
+        ))
       }
     </ul>
   )
 }
 
-Nav.propTypes = {
-  activeUrl: React.PropTypes.string
-}
+
+Nav.propTypes = {}
