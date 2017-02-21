@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 export const Nav = (props) => {
   const routes = [
-    {url: '/1', name: 'One'},
-    {url: '/2', name: 'Two'},
-    {url: '/3', name: 'Three'}
+    {url: '/', name: 'API'},
+    {url: '/charities', name: 'Charities'},
+    {url: '/analysis', name: 'Analysis'},
+    {url: '/about', name: 'About'}
   ]
   return (
     <ul className="nav nav-tabs">
