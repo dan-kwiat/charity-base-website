@@ -30,15 +30,27 @@ code {
 }
 
 .filter-form {
-  border-color: pink;
+  border-color: #FF8A80;
   border-style: solid;
   border-radius: 5px;
-  background-color: pink;
+  background-color: #FF8A80;
   padding: 10px;
 }
 
 .filter-query {
-  color: pink;
+  color: #FF8A80;
+}
+
+.projection-form {
+  border-color: #B9F6CA;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: #B9F6CA;
+  padding: 10px;
+}
+
+.projection-query {
+  color: #B9F6CA;
 }
 
 

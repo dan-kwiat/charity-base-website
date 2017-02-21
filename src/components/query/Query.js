@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Filters } from './Filters';
+import { Projections } from './Projections';
 
 export class Query extends Component {
   state = {
-    filterString: ''
+    filterString: '',
+    projectionString: ''
   }
   stringify = (query) => {
     return Object.keys(query)
@@ -15,14 +17,21 @@ export class Query extends Component {
       filterString: this.stringify(query)
     })
   }
+  updateProjection = (projectionString) => {
+    this.setState({projectionString})
+  }
   render() {
     return (
       <div>
         <div className="row">
           <div className="col-xs-6"><Filters onQueryChange={this.updateFilterString} /></div>
-          <div className="col-xs-6"></div>
+          <div className="col-xs-6"><Projections onChange={this.updateProjection}/></div>
         </div>
-        <code className="filter-query">{this.state.filterString}</code>
+        <code>
+          <span className="filter-query">{this.state.filterString}</span>
+          <span style={{color:'#aaa'}}>&</span>
+          <span className="projection-query">{this.state.projectionString}</span>
+        </code>
       </div>
     )
   }
