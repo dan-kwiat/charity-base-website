@@ -9,7 +9,7 @@ const QueryBuilder = ({onFilterChange, onProjectionChange}) => {
     <Panel collapsible defaultExpanded header="Query Builder">
       <Row>
         <Col xs={6}><Filters onChange={onFilterChange} /></Col>
-        <Col xs={6}><Projections onChange={onProjectionChange} /></Col>
+        <Col xs={3}><Projections onChange={onProjectionChange} /></Col>
       </Row>
     </Panel>
   )

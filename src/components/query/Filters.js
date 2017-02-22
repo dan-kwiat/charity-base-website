@@ -33,7 +33,7 @@ export class Filters extends Component {
   render() {
     return (
       <div className="filter-form">
-        <h3>Filters</h3>
+        <h3 className="text-center">Filters</h3>
         <Form horizontal>
           <FormGroup>
             <Col componentClass={ControlLabel} sm={6}>
@@ -75,7 +75,7 @@ export class Filters extends Component {
               <FormControl type="text" placeholder="E.g. 0" defaultValue={this.state.query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber', '=')} />
             </Col>
           </FormGroup>
-          <FormGroup>
+          <FormGroup style={{textAlign: 'right'}}>
             <Col sm={12}>
               <Checkbox defaultChecked={this.state.query['registered=']} onChange={this.updateQuery.bind(null, 'registered', '=')} >Registered / De-registered</Checkbox>
             </Col>

@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Checkbox } from 'react-bootstrap';
 
+const projections = [
+  'govDoc',
+  'areaOfBenefit',
+  'mainCharity',
+  'contact',
+  'accountSubmission',
+  'returnSubmission',
+  'areaOfOperation',
+  'class',
+  'financial',
+  'otherNames',
+  'objects',
+  'partB',
+  'registration',
+  'trustees',
+  'beta'
+];
+
+
 export class Projections extends Component {
   state = {
     fields: {
@@ -29,13 +48,22 @@ export class Projections extends Component {
   render() {
     return (
       <div className="projection-form">
-        <h3>Projections</h3>
+        <h3 className="text-center">Projections</h3>
         <Form horizontal>
-          <FormGroup>
-            <Col sm={12}>
-              <Checkbox defaultChecked={this.state.fields.mainCharity} onChange={this.updateFields.bind(null, 'mainCharity')} >Main Info</Checkbox>
-            </Col>
-          </FormGroup>
+          {
+            projections.map((f, i) => {
+              return (
+                <FormGroup key={i}>
+                  <Col sm={12}>
+                    <Checkbox defaultChecked={this.state.fields[f]} onChange={this.updateFields.bind(null, f)} >
+                      {f}
+                    </Checkbox>
+                  </Col>
+                </FormGroup>
+              )
+
+            })
+          }
         </Form>
       </div>
     )
