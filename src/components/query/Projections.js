@@ -43,5 +43,5 @@ export class Projections extends Component {
 }
 
 Projections.propTypes = {
-  onQueryChange: React.PropTypes.func
+  onChange: React.PropTypes.func
 }

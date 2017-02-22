@@ -9,7 +9,7 @@ export class Filters extends Component {
     }
   }
   componentDidMount() {
-    this.props.onQueryChange(this.state.query)
+    this.updateString(this.state.query)
   }
   updateQuery = (param, op, event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value.trim().split(' ').join('+')
@@ -19,7 +19,16 @@ export class Filters extends Component {
       delete(query[`${param}${op}`])
     }
     this.setState({query})
-    this.props.onQueryChange(query)
+    this.updateString(query)
+  }
+  stringify = (query) => {
+    return Object.keys(query)
+    .map(k => `${k}${query[k]}`)
+    .join('&')
+  }
+  updateString = (query) => {
+    const filterString = this.stringify(query)
+    this.props.onChange(filterString)
   }
   render() {
     return (
@@ -78,5 +87,5 @@ export class Filters extends Component {
 }
 
 Filters.propTypes = {
-  onQueryChange: React.PropTypes.func
+  onChange: React.PropTypes.func
 }
