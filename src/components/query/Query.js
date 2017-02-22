@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { QueryBuilder } from './QueryBuilder';
+import { Request } from './Request';
 import { loadCharities } from '../../lib/charitiesService';
 
 
@@ -29,18 +30,13 @@ export class Query extends Component {
     })
   }
   render() {
-    const {filter, projection} = this.state.queryStrings
     return (
       <div style={{paddingTop: '50px'}}>
         <QueryBuilder
         onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
         onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
         />
-        <code>
-          <span className="filter-query">{filter}</span>
-          <span style={{color:'#aaa'}}>&</span>
-          <span className="projection-query">{projection}</span>
-        </code>
+        <Request {...this.state.queryStrings} />
         <pre>
           {this.state.loading ? 'Loading...' : JSON.stringify(this.state.response, undefined, 2)}
         </pre>
