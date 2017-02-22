@@ -73,6 +73,11 @@
   color: #B9F6CA;
 }
 
+.query-response {
+  height: 600px;
+  overflow-y: auto;
+}
+
 
 
 /* GitHubFlag animation: */

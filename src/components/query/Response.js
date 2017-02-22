@@ -1,10 +1,13 @@
 import React from 'react';
+import { Panel } from 'react-bootstrap';
 
 export const Response = ({loading, jsonData}) => {
   return (
-    <pre>
-      {loading ? 'Loading...' : JSON.stringify(jsonData, undefined, 2)}
-    </pre>
+    <Panel collapsible defaultExpanded header="JSON Response">
+      <pre className="query-response">
+        {loading ? 'Loading...' : JSON.stringify(jsonData, undefined, 2)}
+      </pre>
+    </Panel>
   )
 }
 
