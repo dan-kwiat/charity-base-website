@@ -26,10 +26,6 @@
 }
 
 
-code {
-  background-color: #333;
-}
-
 
 .panel-title {
   font-weight: bold;
@@ -50,6 +46,18 @@ code {
 .filter-form {
   border-color: #FF8A80;
   background-color: #FF8A80;
+}
+
+
+
+.query-string {
+  padding: 5px;
+  background-color: #333;
+  white-space: pre-wrap;
+}
+
+.default-query {
+  color: #aaa;
 }
 
 .filter-query {

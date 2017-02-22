@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { QueryBuilder } from './QueryBuilder';
 import { Request } from './Request';
+import { Response } from './Response';
 import { loadCharities } from '../../lib/charitiesService';
 
 
@@ -37,9 +38,7 @@ export class Query extends Component {
         onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
         />
         <Request {...this.state.queryStrings} />
-        <pre>
-          {this.state.loading ? 'Loading...' : JSON.stringify(this.state.response, undefined, 2)}
-        </pre>
+        <Response loading={this.state.loading} jsonData={this.state.response} />
       </div>
     )
   }
