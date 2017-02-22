@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Filters } from './Filters';
 import { Projections } from './Projections';
 import { Row, Col, Panel } from 'react-bootstrap';
+import { loadCharities } from '../../lib/charitiesService';
 
 const QueryBuilder = ({onFilterChange, onProjectionChange}) => {
   return (
@@ -21,21 +22,45 @@ QueryBuilder.propTypes = {
 
 export class Query extends Component {
   state = {
-    filter: '',
-    projection: ''
+    queryStrings: {
+      filter: '',
+      projection: ''
+    },
+    response: {},
+    loading: false
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.queryStrings!==this.state.queryStrings) {
+      this.setState({loading: true})
+      loadCharities(this.state.queryStrings)
+      .then(response => {
+        this.setState({loading:false, response})
+      })
+    }
+  }
+  updateQueryStrings = (queryType, value) => {
+    this.setState((prevState) => {
+      const queryStrings = {...prevState.queryStrings}
+      queryStrings[queryType] = value
+      return {queryStrings}
+    })
   }
   render() {
+    const {filter, projection} = this.state.queryStrings
     return (
       <div style={{paddingTop: '50px'}}>
         <QueryBuilder
-        onFilterChange={filter=>this.setState({filter})}
-        onProjectionChange={projection=>this.setState({projection})}
+        onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
+        onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
         />
         <code>
-          <span className="filter-query">{this.state.filter}</span>
+          <span className="filter-query">{filter}</span>
           <span style={{color:'#aaa'}}>&</span>
-          <span className="projection-query">{this.state.projection}</span>
+          <span className="projection-query">{projection}</span>
         </code>
+        <pre>
+          {this.state.loading ? 'Loading...' : JSON.stringify(this.state.response, undefined, 2)}
+        </pre>
       </div>
     )
   }
