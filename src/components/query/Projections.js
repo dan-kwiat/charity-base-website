@@ -47,7 +47,7 @@ export class Projections extends Component {
   }
   render() {
     return (
-      <div className="projection-form">
+      <div className="query-box projection-form">
         <h3 className="text-center">Projections</h3>
         <Form horizontal>
           {

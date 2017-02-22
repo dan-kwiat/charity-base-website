@@ -32,7 +32,7 @@ export class Filters extends Component {
   }
   render() {
     return (
-      <div className="filter-form">
+      <div className="query-box filter-form">
         <h3 className="text-center">Filters</h3>
         <Form horizontal>
           <FormGroup>

@@ -30,12 +30,17 @@ code {
   background-color: #333;
 }
 
-.filter-form {
-  border-color: #FF8A80;
+.query-box {
   border-style: solid;
   border-radius: 5px;
-  background-color: #FF8A80;
   padding: 10px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.filter-form {
+  border-color: #FF8A80;
+  background-color: #FF8A80;
 }
 
 .filter-query {
@@ -44,12 +49,7 @@ code {
 
 .projection-form {
   border-color: #B9F6CA;
-  border-style: solid;
-  border-radius: 5px;
   background-color: #B9F6CA;
-  padding: 10px;
-  max-height: 400px;
-  overflow-y: auto;
 }
 
 .projection-query {
