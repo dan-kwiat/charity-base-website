@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Checkbox } from 'react-bootstrap';
 
+
 const projections = [
-  'govDoc',
-  'areaOfBenefit',
-  'mainCharity',
-  'contact',
-  'accountSubmission',
-  'returnSubmission',
-  'areaOfOperation',
-  'class',
-  'financial',
-  'otherNames',
-  'objects',
-  'partB',
-  'registration',
-  'trustees',
-  'beta'
-];
+  {name: 'Main Info', field: 'mainCharity'},
+  {name: 'All Names', field: 'otherNames'},
+  {name: 'Contact', field: 'contact'},
+  {name: 'Beta Info', field: 'beta'},
+  {name: 'Financial Info', field: 'financial'},
+  {name: 'Governing Doc', field: 'govDoc'},
+  {name: 'Trustees', field: 'trustees'},
+  {name: 'Area of Benefit', field: 'areaOfBenefit'},
+  {name: 'Area of Operation', field: 'areaOfOperation'},
+  {name: 'Accounts', field: 'accountSubmission'},
+  {name: 'Returns', field: 'returnSubmission'},
+  {name: 'Class', field: 'class'},
+  {name: 'Objects', field: 'objects'},
+  {name: 'Part B', field: 'partB'},
+  {name: 'Registration', field: 'registration'}
+]
 
 
 export class Projections extends Component {
@@ -51,12 +52,12 @@ export class Projections extends Component {
         <h3 className="text-center">Projections</h3>
         <Form horizontal>
           {
-            projections.map((f, i) => {
+            projections.map((p, i) => {
               return (
                 <FormGroup key={i}>
                   <Col sm={12}>
-                    <Checkbox defaultChecked={this.state.fields[f]} onChange={this.updateFields.bind(null, f)} >
-                      {f}
+                    <Checkbox defaultChecked={this.state.fields[p.field]} onChange={this.updateFields.bind(null, p.field)} >
+                      {p.name}
                     </Checkbox>
                   </Col>
                 </FormGroup>
