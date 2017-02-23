@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, Checkbox } from 'react-bootstrap';
+import { FormGroup, Col, Checkbox } from 'react-bootstrap';
 
 
 const projections = [
@@ -50,22 +50,20 @@ export class Projections extends Component {
     return (
       <div className="query-box projection-form">
         <h3 className="text-center">Projections</h3>
-        <Form horizontal>
-          {
-            projections.map((p, i) => {
-              return (
-                <FormGroup key={i}>
-                  <Col sm={12}>
-                    <Checkbox defaultChecked={this.state.fields[p.field]} onChange={this.updateFields.bind(null, p.field)} >
-                      {p.name}
-                    </Checkbox>
-                  </Col>
-                </FormGroup>
-              )
+        {
+          projections.map((p, i) => {
+            return (
+              <FormGroup key={i}>
+                <Col sm={12}>
+                  <Checkbox defaultChecked={this.state.fields[p.field]} onChange={this.updateFields.bind(null, p.field)} >
+                    {p.name}
+                  </Checkbox>
+                </Col>
+              </FormGroup>
+            )
 
-            })
-          }
-        </Form>
+          })
+        }
       </div>
     )
   }

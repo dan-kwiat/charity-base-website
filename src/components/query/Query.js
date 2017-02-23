@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form } from 'react-bootstrap';
 import { QueryBuilder } from './QueryBuilder';
 import { Request } from './Request';
 import { Response } from './Response';
@@ -39,6 +40,10 @@ export class Query extends Component {
       })
     })
   }
+  onFormSubmit = (queryStrings, event) => {
+    event.preventDefault()
+    this.requestCharities(queryStrings)
+  }
   updateQueryStrings = (queryType, value) => {
     this.setState((prevState) => {
       const queryStrings = {...prevState.queryStrings}
@@ -49,18 +54,15 @@ export class Query extends Component {
   render() {
     return (
       <div style={{paddingTop: '20px'}}>
-        <div>
+        <Form horizontal onSubmit={this.onFormSubmit.bind(null, this.state.queryStrings)}>
           <QueryBuilder
           onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
           onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
           />
-        </div>
-
-        <Request
-        {...this.state.queryStrings}
-        onRequest={this.requestCharities.bind(null, this.state.queryStrings)}
-        />
-
+          <Request
+          {...this.state.queryStrings}
+          />
+        </Form>
         <Response
         loading={this.state.loading}
         outDated={this.state.queryUpdated}

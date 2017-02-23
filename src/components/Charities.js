@@ -8,9 +8,6 @@ const DemoDescription = () => (
       Use the <i>Query Builder</i> below to construct a GET request to the CharityBase API.
     </p>
     <p>
-      The response will be updated each time you make a change.
-    </p>
-    <p>
       For detailed instructions, see the <a href="https://github.com/tithebarn/charity-base/blob/master/api/README.md">API docs</a>.
     </p>
   </div>

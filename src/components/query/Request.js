@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 
-export const Request = ({filter, projection, onRequest}) => {
+export const Request = ({filter, projection}) => {
   return (
     <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
@@ -14,7 +14,7 @@ export const Request = ({filter, projection, onRequest}) => {
           </pre>
         </Col>
         <Col sm={2} className="text-right">
-          <Button bsStyle="default" block bsSize="large" style={{height:'60px'}} onClick={onRequest}>GET</Button>
+          <Button type="submit" bsStyle="default" bsSize="large" block style={{height:'60px'}}>GET</Button>
         </Col>
       </Row>
     </div>
@@ -23,6 +23,5 @@ export const Request = ({filter, projection, onRequest}) => {
 
 Request.propTypes = {
   filter: React.PropTypes.string,
-  projection: React.PropTypes.string,
-  onRequest: React.PropTypes.func
+  projection: React.PropTypes.string
 }
