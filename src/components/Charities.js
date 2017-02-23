@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
 import { Query } from './query'
 
+
+const DemoDescription = () => (
+  <div className="lead" style={{paddingTop: '20px'}}>
+    <p>
+      Use the <i>Query Builder</i> below to construct a GET request to the CharityBase API.
+    </p>
+    <p>
+      The response will be updated each time you make a change.
+    </p>
+    <p>
+      For detailed instructions, see the <a href="https://github.com/tithebarn/charity-base/blob/master/api/README.md">API docs</a>.
+    </p>
+  </div>
+)
+
 export class Charities extends Component {
-  state = {
-    charities: [{id:0, name:'c1'}, {id:1, name:'c2'}]
-  }
   render() {
     return (
       <div>
+        <DemoDescription />
         <Query />
-        <input />
-        {this.state.charities.map((x,i) => {
-          return (
-            <div key={i}>
-              <Link to={`/charities/${x.id}`}>{x.name}</Link>
-            </div>
-          )
-        })}
-        <Route path="/charities/:charityId" render={({match}) => {
-          const charity = this.state.charities.find(x => x.id===Number(match.params.charityId))
-          return (
-            <div>
-              <div>CharityId: {charity.id}</div>
-              <div>CharityName: {charity.name}</div>
-            </div>
-          )
-        }} />
       </div>
     )
   }

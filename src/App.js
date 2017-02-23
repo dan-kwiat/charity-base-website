@@ -9,13 +9,13 @@ const Director = ({url}) => {
     case '/':
       return (
         <div>
-          Home
+          <Charities />
         </div>
       )
-    case '/charities':
+    case '/about':
       return (
         <div>
-          <Charities />
+          About
         </div>
       )
     default:
@@ -31,7 +31,7 @@ const App = () => {
       <div className="App-header">
         <h2>CharityBase<small>.uk</small></h2>
         <p className="App-intro">
-          The API for charity data
+          API for Charity Data
         </p>
       </div>
       <div className="container">
