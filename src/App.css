@@ -51,6 +51,7 @@
 
 
 .query-string {
+  height: 60px;
   padding: 5px;
   background-color: #333;
   white-space: pre-wrap;
@@ -78,6 +79,14 @@
   overflow-y: auto;
 }
 
+.response-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.8);
+}
 
 
 /* GitHubFlag animation: */

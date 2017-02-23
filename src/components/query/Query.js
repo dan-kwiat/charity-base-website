@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { QueryBuilder } from './QueryBuilder';
 import { Request } from './Request';
 import { Response } from './Response';
-import { Button } from 'react-bootstrap';
 import { loadCharities } from '../../lib/charitiesService';
 
 
@@ -49,15 +48,17 @@ export class Query extends Component {
   }
   render() {
     return (
-      <div style={{paddingTop: '50px'}}>
+      <div style={{paddingTop: '20px'}}>
         <QueryBuilder
         onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
         onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
         />
-        <Request {...this.state.queryStrings} />
-        <div className="text-center" style={{paddingBottom: '20px'}}>
-          <Button bsStyle="primary" bsSize="large" disabled={!this.state.queryUpdated} onClick={this.requestCharities.bind(null, this.state.queryStrings)}>GET</Button>
-        </div>
+        <hr />
+        <Request
+        {...this.state.queryStrings}
+        onRequest={this.requestCharities.bind(null, this.state.queryStrings)}
+        />
+        <hr />
         <Response
         loading={this.state.loading}
         outDated={this.state.queryUpdated}
