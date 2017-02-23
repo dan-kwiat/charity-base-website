@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { QueryBuilder } from './QueryBuilder';
 import { Request } from './Request';
 import { Response } from './Response';
+import { Button } from 'react-bootstrap';
 import { loadCharities } from '../../lib/charitiesService';
 
 
@@ -11,25 +12,33 @@ export class Query extends Component {
       filter: '',
       projection: ''
     },
-    response: {},
+    queryUpdated: false,
     loading: false,
-    numRequests: 0
+    numRequests: 0,
+    response: null
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.queryStrings!==this.state.queryStrings) {
-      let requestId
-      this.setState((prevState) => {
-        requestId = prevState.numRequests + 1
-        return {loading: true, numRequests: requestId}
-      })
-      loadCharities(this.state.queryStrings)
-      .then(response => {
-        this.setState((prevState) => {
-          const isLatest = requestId===prevState.numRequests
-          return isLatest ? {loading: false, response} : {}
-        })
-      })
+    const queryUpdated = prevState.queryStrings!==this.state.queryStrings
+    if (queryUpdated) {
+      this.setState({queryUpdated})
+      if (this.state.response===null) {
+        this.requestCharities(this.state.queryStrings)
+      }
     }
+  }
+  requestCharities = queryStrings => {
+    let requestId
+    this.setState((prevState) => {
+      requestId = prevState.numRequests + 1
+      return {loading: true, queryUpdated: false, numRequests: requestId}
+    })
+    loadCharities(queryStrings)
+    .then(response => {
+      this.setState((prevState) => {
+        const isLatest = requestId===prevState.numRequests
+        return isLatest ? {loading: false, response} : {}
+      })
+    })
   }
   updateQueryStrings = (queryType, value) => {
     this.setState((prevState) => {
@@ -46,7 +55,14 @@ export class Query extends Component {
         onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
         />
         <Request {...this.state.queryStrings} />
-        <Response loading={this.state.loading} jsonData={this.state.response} />
+        <div className="text-center" style={{paddingBottom: '20px'}}>
+          <Button bsStyle="primary" bsSize="large" disabled={!this.state.queryUpdated} onClick={this.requestCharities.bind(null, this.state.queryStrings)}>GET</Button>
+        </div>
+        <Response
+        loading={this.state.loading}
+        outDated={this.state.queryUpdated}
+        jsonData={this.state.response}
+        />
       </div>
     )
   }
