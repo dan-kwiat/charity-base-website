@@ -12,14 +12,22 @@ export class Query extends Component {
       projection: ''
     },
     response: {},
-    loading: false
+    loading: false,
+    numRequests: 0
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.queryStrings!==this.state.queryStrings) {
-      this.setState({loading: true})
+      let requestId
+      this.setState((prevState) => {
+        requestId = prevState.numRequests + 1
+        return {loading: true, numRequests: requestId}
+      })
       loadCharities(this.state.queryStrings)
       .then(response => {
-        this.setState({loading:false, response})
+        this.setState((prevState) => {
+          const isLatest = requestId===prevState.numRequests
+          return isLatest ? {loading: false, response} : {}
+        })
       })
     }
   }
