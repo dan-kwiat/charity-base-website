@@ -36,6 +36,14 @@ export class Filters extends Component {
         <h3 className="text-center">Filters</h3>
         <FormGroup>
           <Col componentClass={ControlLabel} sm={6}>
+            Search terms
+          </Col>
+          <Col sm={6}>
+            <FormControl type="text" placeholder="E.g. NHS London" onChange={this.updateQuery.bind(null, 'search', '=')} />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={6}>
             Minimum Gross Income
           </Col>
           <Col sm={6}>
@@ -48,14 +56,6 @@ export class Filters extends Component {
           </Col>
           <Col sm={6}>
             <FormControl type="text" placeholder="E.g. 17000" onChange={this.updateQuery.bind(null, 'mainCharity.income', '<=')} />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={6}>
-            Search terms
-          </Col>
-          <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. NHS London" onChange={this.updateQuery.bind(null, 'search', '=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -74,8 +74,8 @@ export class Filters extends Component {
             <FormControl type="text" placeholder="E.g. 0" defaultValue={this.state.query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber', '=')} />
           </Col>
         </FormGroup>
-        <FormGroup style={{textAlign: 'right'}}>
-          <Col sm={12}>
+        <FormGroup>
+          <Col smOffset={6} sm={6}>
             <Checkbox defaultChecked={this.state.query['registered=']} onChange={this.updateQuery.bind(null, 'registered', '=')} >Registered / De-registered</Checkbox>
           </Col>
         </FormGroup>
