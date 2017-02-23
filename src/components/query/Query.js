@@ -49,16 +49,18 @@ export class Query extends Component {
   render() {
     return (
       <div style={{paddingTop: '20px'}}>
-        <QueryBuilder
-        onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
-        onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
-        />
-        <hr />
+        <div>
+          <QueryBuilder
+          onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
+          onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
+          />
+        </div>
+
         <Request
         {...this.state.queryStrings}
         onRequest={this.requestCharities.bind(null, this.state.queryStrings)}
         />
-        <hr />
+
         <Response
         loading={this.state.loading}
         outDated={this.state.queryUpdated}

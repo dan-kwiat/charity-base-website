@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 export const Request = ({filter, projection, onRequest}) => {
   return (
-    <div>
+    <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
         <Col sm={10}>
           <pre className="query-string">

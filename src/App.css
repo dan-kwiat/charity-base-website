@@ -26,15 +26,6 @@
 }
 
 
-
-.panel-title {
-  font-weight: bold;
-  font-size: 20px;
-}
-.panel-title > a {
-  cursor: pointer;
-}
-
 .query-box {
   border-style: solid;
   border-radius: 5px;
