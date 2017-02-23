@@ -61,6 +61,7 @@ export class Query extends Component {
           />
           <Request
           {...this.state.queryStrings}
+          outDated={this.state.queryUpdated}
           />
         </Form>
         <Response

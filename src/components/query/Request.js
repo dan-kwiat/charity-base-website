@@ -1,7 +1,18 @@
 import React from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Popover } from 'react-bootstrap';
 
-export const Request = ({filter, projection}) => {
+const RequestPrompt = () => (
+  <Popover
+  id="popover-positioned-left"
+  placement="bottom"
+  positionTop={60}
+  >
+    Click <strong>GET</strong> or hit <strong>Enter</strong> to update response
+  </Popover>
+)
+
+
+export const Request = ({filter, projection, outDated}) => {
   return (
     <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
@@ -15,6 +26,7 @@ export const Request = ({filter, projection}) => {
         </Col>
         <Col sm={2} className="text-right">
           <Button className="request-button" type="submit" bsStyle="default" bsSize="large" block>GET</Button>
+          {outDated ? <RequestPrompt /> : ''}
         </Col>
       </Row>
     </div>
@@ -23,5 +35,6 @@ export const Request = ({filter, projection}) => {
 
 Request.propTypes = {
   filter: React.PropTypes.string,
-  projection: React.PropTypes.string
+  projection: React.PropTypes.string,
+  outDated: React.PropTypes.bool
 }
