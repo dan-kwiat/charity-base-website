@@ -48,6 +48,11 @@
   white-space: pre-wrap;
 }
 
+.request-button {
+  height: 60px;
+  background-image: linear-gradient(to top right, #FF8A80, #FF5252);
+}
+
 .default-query {
   color: #aaa;
 }

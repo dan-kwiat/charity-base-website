@@ -14,7 +14,7 @@ export const Request = ({filter, projection}) => {
           </pre>
         </Col>
         <Col sm={2} className="text-right">
-          <Button type="submit" bsStyle="default" bsSize="large" block style={{height:'60px'}}>GET</Button>
+          <Button className="request-button" type="submit" bsStyle="default" bsSize="large" block>GET</Button>
         </Col>
       </Row>
     </div>
