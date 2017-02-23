@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
-import { Nav, Charities, GitHubFlag } from './components';
+import { Nav, Charities, About, GitHubFlag } from './components';
 
 
 const Director = ({url}) => {
@@ -14,9 +14,7 @@ const Director = ({url}) => {
       )
     case '/about':
       return (
-        <div>
-          About
-        </div>
+        <About />
       )
     default:
       return <Redirect to="/" />
