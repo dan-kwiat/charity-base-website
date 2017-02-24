@@ -19,15 +19,6 @@ export class Query extends Component {
     numRequests: 0,
     response: null
   }
-  componentDidUpdate(prevProps, prevState) {
-    const queryUpdated = prevState.queryStrings!==this.state.queryStrings
-    if (queryUpdated) {
-      this.setState({queryUpdated})
-      if (this.state.response===null) {
-        this.requestCharities(this.state.queryStrings)
-      }
-    }
-  }
   requestCharities = queryStrings => {
     let requestId
     this.setState((prevState) => {
@@ -50,7 +41,7 @@ export class Query extends Component {
     this.setState((prevState) => {
       const queryStrings = {...prevState.queryStrings}
       queryStrings[queryType] = value
-      return {queryStrings}
+      return {queryStrings, queryUpdated: true}
     })
   }
   render() {

@@ -7,7 +7,7 @@ const RequestPrompt = () => (
   placement="bottom"
   positionTop={60}
   >
-    Click <strong>GET</strong> or hit <strong>Enter</strong> to update response
+    Click <strong>GET</strong> to update response
   </Popover>
 )
 

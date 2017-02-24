@@ -61,13 +61,15 @@ export class Response extends Component {
             </Button>
           </ButtonGroup>
         </div>
-        <div className="query-response">
-          {this.state.view==='JSON' ?
-            <ResponseJSON loading={loading} jsonData={jsonData}/>
-            :
-            <ResponseHuman loading={loading} jsonData={jsonData}/>
-          }
-        </div>
+        {jsonData &&
+          <div className="query-response">
+            {this.state.view==='JSON' ?
+              <ResponseJSON loading={loading} jsonData={jsonData}/>
+              :
+              <ResponseHuman loading={loading} jsonData={jsonData}/>
+            }
+          </div>
+        }
       </div>
     )
   }
