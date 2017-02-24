@@ -20,13 +20,13 @@ export class Query extends Component {
     numRequests: 0,
     response: null
   }
-  requestCharities = queryStrings => {
+  requestCharities = queryStringsArray => {
     let requestId
     this.setState((prevState) => {
       requestId = prevState.numRequests + 1
       return {loading: true, queryUpdated: false, numRequests: requestId}
     })
-    loadCharities(queryStrings)
+    loadCharities(queryStringsArray)
     .then(response => {
       this.setState((prevState) => {
         const isLatest = requestId===prevState.numRequests
@@ -34,9 +34,9 @@ export class Query extends Component {
       })
     })
   }
-  onFormSubmit = (queryStrings, event) => {
+  onFormSubmit = event => {
     event.preventDefault()
-    this.requestCharities(queryStrings)
+    this.requestCharities(this.state.queryStringsArray)
   }
   updateQuery = (queryType, value) => {
     this.setState((prevState) => {
@@ -61,7 +61,7 @@ export class Query extends Component {
   render() {
     return (
       <div style={{paddingTop: '20px'}}>
-        <Form horizontal onSubmit={this.onFormSubmit.bind(null, this.state.queryStrings)}>
+        <Form horizontal onSubmit={this.onFormSubmit}>
           <QueryBuilder
           onFilterChange={this.updateQuery.bind(null, 'filter')}
           onProjectionChange={this.updateQuery.bind(null, 'projection')}
