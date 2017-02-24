@@ -10,7 +10,8 @@ export class Query extends Component {
   state = {
     queryStrings: {
       filter: '',
-      projection: ''
+      projection: '',
+      sort: ''
     },
     queryUpdated: false,
     loading: false,
@@ -58,6 +59,7 @@ export class Query extends Component {
           <QueryBuilder
           onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
           onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
+          onSortChange={this.updateQueryStrings.bind(null, 'sort')}
           />
           <Request
           {...this.state.queryStrings}

@@ -54,7 +54,7 @@ export class Projections extends Component {
           projections.map((p, i) => {
             return (
               <FormGroup key={i}>
-                <Col sm={12}>
+                <Col xs={12}>
                   <Checkbox defaultChecked={this.state.fields[p.field]} onChange={this.updateFields.bind(null, p.field)} >
                     {p.name}
                   </Checkbox>

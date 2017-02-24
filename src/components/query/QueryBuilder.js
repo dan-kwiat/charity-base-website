@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import { Row, Col, Panel, Button } from 'react-bootstrap';
 import { Filters } from './Filters';
 import { Projections } from './Projections';
+import { Sorts } from './Sorts';
+
 
 export class QueryBuilder extends Component {
   state = {
     open: true
   }
   render() {
-    const { onFilterChange, onProjectionChange } = this.props
+    const { onFilterChange, onProjectionChange, onSortChange } = this.props
     return (
       <div>
         <div className="text-right">
@@ -18,8 +20,9 @@ export class QueryBuilder extends Component {
         </div>
         <Panel collapsible expanded={this.state.open}>
           <Row>
-            <Col sm={8}><Filters onChange={onFilterChange} /></Col>
-            <Col sm={4}><Projections onChange={onProjectionChange} /></Col>
+            <Col sm={6}><Filters onChange={onFilterChange} /></Col>
+            <Col sm={3}><Projections onChange={onProjectionChange} /></Col>
+            <Col sm={3}><Sorts onChange={onSortChange} /></Col>
           </Row>
         </Panel>
       </div>
@@ -29,5 +32,6 @@ export class QueryBuilder extends Component {
 
 QueryBuilder.propTypes = {
   onFilterChange: React.PropTypes.func,
-  onProjectionChange: React.PropTypes.func
+  onProjectionChange: React.PropTypes.func,
+  onSortChange: React.PropTypes.func
 }
