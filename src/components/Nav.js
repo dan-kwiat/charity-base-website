@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Nav = () => {
   const routes = [
-    {url: '/', name: 'Charities'},
+    {url: '/', name: 'Home'},
     {url: '/about', name: 'About'}
   ]
   return (
