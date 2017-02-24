@@ -18,8 +18,8 @@ export class QueryBuilder extends Component {
         </div>
         <Panel collapsible expanded={this.state.open}>
           <Row>
-            <Col xs={8}><Filters onChange={onFilterChange} /></Col>
-            <Col xs={4}><Projections onChange={onProjectionChange} /></Col>
+            <Col sm={8}><Filters onChange={onFilterChange} /></Col>
+            <Col sm={4}><Projections onChange={onProjectionChange} /></Col>
           </Row>
         </Panel>
       </div>
