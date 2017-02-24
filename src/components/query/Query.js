@@ -14,6 +14,7 @@ export class Query extends Component {
       sort: '',
       page: ''
     },
+    queryStringsArray: [],
     queryUpdated: false,
     loading: false,
     numRequests: 0,
@@ -37,22 +38,35 @@ export class Query extends Component {
     event.preventDefault()
     this.requestCharities(queryStrings)
   }
-  updateQueryStrings = (queryType, value) => {
+  updateQuery = (queryType, value) => {
     this.setState((prevState) => {
       const queryStrings = {...prevState.queryStrings}
       queryStrings[queryType] = value
-      return {queryStrings, queryUpdated: true}
+      const queryStringsArray = this.objToArray(queryStrings)
+      return {
+        queryStrings,
+        queryStringsArray,
+        queryUpdated: true
+      }
     })
+  }
+  objToArray = queryStrings => {
+    const queryTypes = Object.keys(queryStrings)
+    const queryArray = queryTypes.reduce((acc, queryType) => {
+      const queryString = queryStrings[queryType]
+      return queryString==='' ? acc : [...acc, {queryType, queryString}]
+    }, [])
+    return queryArray
   }
   render() {
     return (
       <div style={{paddingTop: '20px'}}>
         <Form horizontal onSubmit={this.onFormSubmit.bind(null, this.state.queryStrings)}>
           <QueryBuilder
-          onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
-          onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
-          onSortChange={this.updateQueryStrings.bind(null, 'sort')}
-          onPageChange={this.updateQueryStrings.bind(null, 'page')}
+          onFilterChange={this.updateQuery.bind(null, 'filter')}
+          onProjectionChange={this.updateQuery.bind(null, 'projection')}
+          onSortChange={this.updateQuery.bind(null, 'sort')}
+          onPageChange={this.updateQuery.bind(null, 'page')}
           />
           <Request
           {...this.state.queryStrings}
