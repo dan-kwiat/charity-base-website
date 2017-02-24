@@ -31,6 +31,7 @@ export class Pages extends Component {
           <Col sm={8}>
             <FormControl
             type="number"
+            min="1"
             placeholder="E.g. 1"
             defaultValue={1 + this.state.skip/10}
             onChange={e => this.setState({skip: this.state.limit*(e.target.value-1)})}
