@@ -12,20 +12,19 @@ const RequestPrompt = () => (
 )
 
 
-export const Request = ({filter, projection, sort, page, outDated}) => {
+export const Request = ({queryStringsArray, outDated}) => {
   return (
     <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
         <Col sm={10}>
           <pre className="query-string">
             <span className="default-query">https://charitybase.uk/api/v0.2.0/charities/?</span>
-            <span className="filter-query">{filter}</span>
-            <span className="default-query">&</span>
-            <span className="projection-query">{projection}</span>
-            <span className="default-query">&</span>
-            <span className="sort-query">{sort}</span>
-            <span className="default-query">&</span>
-            <span className="page-query">{page}</span>
+            {queryStringsArray.map((q, i) => (
+              <span key={i}>
+                <span className={`${q.queryType}-query`}>{q.queryString}</span>
+                <span className="default-query">{i<queryStringsArray.length-1 && '&'}</span>
+              </span>
+            ))}
           </pre>
         </Col>
         <Col sm={2} className="text-right">
@@ -38,9 +37,6 @@ export const Request = ({filter, projection, sort, page, outDated}) => {
 }
 
 Request.propTypes = {
-  filter: React.PropTypes.string,
-  projection: React.PropTypes.string,
-  sort: React.PropTypes.string,
-  page: React.PropTypes.string,
+  queryStringsArray: React.PropTypes.array,
   outDated: React.PropTypes.bool
 }

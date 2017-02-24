@@ -69,7 +69,7 @@ export class Query extends Component {
           onPageChange={this.updateQuery.bind(null, 'page')}
           />
           <Request
-          {...this.state.queryStrings}
+          queryStringsArray={this.state.queryStringsArray}
           outDated={this.state.queryUpdated}
           />
         </Form>
