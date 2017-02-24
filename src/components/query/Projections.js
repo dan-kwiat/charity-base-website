@@ -30,6 +30,12 @@ export class Projections extends Component {
   componentDidMount() {
     this.updateString(this.state.fields)
   }
+  componentDidUpdate(prevProps, prevState) {
+    const stateUpdated = prevState!==this.state
+    if (stateUpdated) {
+      this.updateString(this.state.fields)
+    }
+  }
   updateFields = (field, event) => {
     const checked = event.target.checked
     const fields = this.state.fields
@@ -39,7 +45,6 @@ export class Projections extends Component {
       delete(fields[field])
     }
     this.setState({fields})
-    this.updateString(fields)
   }
   updateString = (fields) => {
     const commaSeparated = Object.keys(fields).join(',')

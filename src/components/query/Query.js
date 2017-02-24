@@ -11,7 +11,8 @@ export class Query extends Component {
     queryStrings: {
       filter: '',
       projection: '',
-      sort: ''
+      sort: '',
+      page: ''
     },
     queryUpdated: false,
     loading: false,
@@ -60,6 +61,7 @@ export class Query extends Component {
           onFilterChange={this.updateQueryStrings.bind(null, 'filter')}
           onProjectionChange={this.updateQueryStrings.bind(null, 'projection')}
           onSortChange={this.updateQueryStrings.bind(null, 'sort')}
+          onPageChange={this.updateQueryStrings.bind(null, 'page')}
           />
           <Request
           {...this.state.queryStrings}

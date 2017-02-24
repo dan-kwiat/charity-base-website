@@ -12,7 +12,7 @@ const RequestPrompt = () => (
 )
 
 
-export const Request = ({filter, projection, sort, outDated}) => {
+export const Request = ({filter, projection, sort, page, outDated}) => {
   return (
     <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
@@ -24,6 +24,8 @@ export const Request = ({filter, projection, sort, outDated}) => {
             <span className="projection-query">{projection}</span>
             <span className="default-query">&</span>
             <span className="sort-query">{sort}</span>
+            <span className="default-query">&</span>
+            <span className="page-query">{page}</span>
           </pre>
         </Col>
         <Col sm={2} className="text-right">
@@ -39,5 +41,6 @@ Request.propTypes = {
   filter: React.PropTypes.string,
   projection: React.PropTypes.string,
   sort: React.PropTypes.string,
+  page: React.PropTypes.string,
   outDated: React.PropTypes.bool
 }

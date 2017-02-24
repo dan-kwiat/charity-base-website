@@ -47,7 +47,13 @@
 .sort-form {
   border-color: #B2EBF2;
   background-color: #B2EBF2;
-  height: 200px;
+  height: 250px;
+}
+
+.page-form {
+  border-color: #FFFF8D;
+  background-color: #FFFF8D;
+  height: 150px;
 }
 
 
@@ -78,6 +84,11 @@
 .sort-query {
   color: #B2EBF2;
 }
+
+.page-query {
+  color: #FFFF8D;
+}
+
 
 
 .query-response {

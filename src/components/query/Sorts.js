@@ -14,14 +14,11 @@ export class Sorts extends Component {
   componentDidMount() {
     this.updateString(this.state.sortField, this.state.reverse)
   }
-  updateField = (field, event) => {
-    this.setState({sortField: field})
-    this.updateString(field, this.state.reverse)
-  }
-  updateOrder = (event) => {
-    const reverse = event.target.checked
-    this.setState({reverse})
-    this.updateString(this.state.sortField, reverse)
+  componentDidUpdate(prevProps, prevState) {
+    const stateUpdated = prevState!==this.state
+    if (stateUpdated) {
+      this.updateString(this.state.sortField, this.state.reverse)
+    }
   }
   updateString = (field, reverse) => {
     const sortString = field===null ? '' : reverse ? `sort=-${field}` : `sort=${field}`
@@ -38,7 +35,8 @@ export class Sorts extends Component {
                 <Radio
                 name="sortingRadios"
                 defaultChecked={this.state.sortField===s.field}
-                onChange={this.updateField.bind(null, s.field)} >
+                onChange={() => this.setState({sortField: s.field})}
+                >
                   {s.name}
                 </Radio>
               </Col>
@@ -47,7 +45,10 @@ export class Sorts extends Component {
         </FormGroup>
         <FormGroup>
           <Col xs={12}>
-            <Checkbox defaultChecked={this.state.reverse} onChange={this.updateOrder} >
+            <Checkbox
+            defaultChecked={this.state.reverse}
+            onChange={e => this.setState({reverse: e.target.checked})}
+            >
               Descending
             </Checkbox>
           </Col>

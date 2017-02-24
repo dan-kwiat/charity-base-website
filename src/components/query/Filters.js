@@ -11,6 +11,12 @@ export class Filters extends Component {
   componentDidMount() {
     this.updateString(this.state.query)
   }
+  componentDidUpdate(prevProps, prevState) {
+    const stateUpdated = prevState!==this.state
+    if (stateUpdated) {
+      this.updateString(this.state.query)
+    }
+  }
   updateQuery = (param, op, event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value.trim().split(' ').join('+')
     const query = {...this.state.query}
@@ -19,7 +25,6 @@ export class Filters extends Component {
       delete(query[`${param}${op}`])
     }
     this.setState({query})
-    this.updateString(query)
   }
   stringify = (query) => {
     return Object.keys(query)
