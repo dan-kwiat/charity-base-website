@@ -2,16 +2,10 @@
   text-align: left;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 50px;
-}
-
 .App-header {
+  padding-top: 30px;
   text-align: center;
-  background-color: #fff;
-  height: 150px;
-  padding: 20px;
+  background-image: linear-gradient(to bottom, #CCC, #FFF);
   color: #222;
 }
 
@@ -20,40 +14,63 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.nav-container {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.sticky-header {
+  background-image: linear-gradient(to bottom, #EEE, #FFF);
+  z-index: 999;
 }
 
 
+.github-corner > svg {
+  fill: #FF8A80;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  border: 0;
+  right: 0;
+  z-index: 2000;
+}
+/* GitHubFlag animation: */
+.github-corner:hover .octo-arm {animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+
+
 .query-box {
+  background-color: #FFF;
+  border-color: #DDD;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: 4px;
+  border-width: 1px;
   padding: 10px;
-  height: 400px;
   overflow-y: auto;
 }
 
 .filter-form {
   border-color: #FF8A80;
   background-color: #FF8A80;
+  height: 400px;
 }
 
 .projection-form {
   border-color: #B9F6CA;
   background-color: #B9F6CA;
+  height: 400px;
 }
 
 .sort-form {
   border-color: #B2EBF2;
   background-color: #B2EBF2;
-  height: 225px;
+  height: 175px;
 }
 
 .page-form {
   border-color: #FFFF8D;
   background-color: #FFFF8D;
-  height: 175px;
+  height: 225px;
 }
 
 
@@ -105,19 +122,6 @@
   background-color: rgba(255,255,255,0.8);
   z-index: 1000
 }
-
-
-.github-corner > svg {
-  fill: #FF8A80;
-  color: #fff;
-  position: fixed;
-  top: 0;
-  border: 0;
-  right: 0;
-  z-index: 2000;
-}
-/* GitHubFlag animation: */
-.github-corner:hover .octo-arm {animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 
 
 /* Replicate bootstrap styles for nav <a> instead of <li> (to allow direct use of router NavLink) */

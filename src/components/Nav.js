@@ -7,20 +7,22 @@ export const Nav = () => {
     {url: '/about', name: 'About'}
   ]
   return (
-    <ul className="nav nav-tabs">
-      {
-        routes.map((r, i) => (
-          <NavLink
-          key={i}
-          exact
-          to={r.url}
-          activeClassName="active"
-          >
-            {r.name}
-          </NavLink>
-        ))
-      }
-    </ul>
+    <div className="container nav-container">
+      <ul className="nav nav-tabs">
+        {
+          routes.map((r, i) => (
+            <NavLink
+            key={i}
+            exact
+            to={r.url}
+            activeClassName="active"
+            >
+              {r.name}
+            </NavLink>
+          ))
+        }
+      </ul>
+    </div>
   )
 }
 

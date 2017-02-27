@@ -21,21 +21,25 @@ const Director = ({url}) => {
   }
 }
 
-
+import { StickyContainer, Sticky } from 'react-sticky';
 const App = () => {
   return (
     <div className="App">
-      <GitHubFlag />
-      <div className="App-header">
-        <h2>CharityBase<small>.uk</small></h2>
-        <p className="App-intro">
-          API for Charity Data
-        </p>
-      </div>
-      <div className="container">
-        <Nav />
-        <Route path="/:filter?" render={({match}) => <Director {...match} />} />
-      </div>
+      <StickyContainer>
+        <GitHubFlag />
+        <div className="App-header">
+          <h1>CharityBase<small>.uk</small></h1>
+          <p className="App-intro">
+            API for Charity Data
+          </p>
+          <Sticky stickyClassName="sticky-header">
+            <Nav />
+          </Sticky>
+        </div>
+        <div className="container">
+          <Route path="/:filter?" render={({match}) => <Director {...match} />} />
+        </div>
+      </StickyContainer>
     </div>
   );
 }
