@@ -109,8 +109,7 @@
 
 
 .query-response {
-  min-height: 600px;
-  overflow-y: auto;
+  min-height: 400px;
 }
 
 .response-overlay {

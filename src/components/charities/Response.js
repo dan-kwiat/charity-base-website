@@ -6,7 +6,7 @@ const ResponseOverlay = () => <div className="response-overlay"></div>
 
 
 const ResponseJSON = ({loading, jsonData}) => (
-  <pre>
+  <pre className="query-response">
     {loading ? 'Requesting...' : JSON.stringify(jsonData, undefined, 2)}
   </pre>
 )
@@ -18,12 +18,16 @@ ResponseJSON.propTypes = {
 
 
 const ResponseHuman = ({loading, jsonData}) => (
-  <div>
+  <div className="query-response">
     {loading ?
       'Requesting...'
       :
       <ul className="list-group">
-        {jsonData.charities.map((c, i) => <div key={i} className="list-group-item">{c.name}</div>)}
+
+        {jsonData.charities.length>0
+          ? jsonData.charities.map((c, i) => <div key={i} className="list-group-item">{c.name}</div>)
+          : "No results with requested filters."
+        }
       </ul>
     }
   </div>
@@ -61,14 +65,10 @@ export class Response extends Component {
             </Button>
           </ButtonGroup>
         </div>
-        {jsonData &&
-          <div className="query-response">
-            {this.state.view==='JSON' ?
-              <ResponseJSON loading={loading} jsonData={jsonData}/>
-              :
-              <ResponseHuman loading={loading} jsonData={jsonData}/>
-            }
-          </div>
+        {this.state.view==='JSON' ?
+          <ResponseJSON loading={loading} jsonData={jsonData}/>
+          :
+          <ResponseHuman loading={loading} jsonData={jsonData}/>
         }
       </div>
     )
