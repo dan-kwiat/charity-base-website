@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
-import { QueryBuilder } from './QueryBuilder';
+import { QueryBuilder } from './query_builder/QueryBuilder';
 import { Request } from './Request';
 import { Response } from './Response';
 import { loadCharities } from '../../lib/charitiesService';
 
 
-export class Query extends Component {
+export class Charities extends Component {
   state = {
     queryStrings: {
       filter: '',
@@ -58,9 +58,18 @@ export class Query extends Component {
     }, [])
     return queryArray
   }
+  renderDescription = () => (
+    <div className="lead">
+      <p>
+        Use the <i>Query Builder</i> below to construct a GET request to the CharityBase API.
+        For detailed instructions, see the <a href="https://github.com/tithebarn/charity-base/blob/master/api/README.md">API docs</a>.
+      </p>
+    </div>
+  )
   render() {
     return (
-      <div style={{paddingTop: '20px'}}>
+      <div style={{paddingTop: '40px'}}>
+        {this.renderDescription()}
         <Form horizontal onSubmit={this.onFormSubmit}>
           <QueryBuilder
           onFilterChange={this.updateQuery.bind(null, 'filter')}
