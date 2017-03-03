@@ -2,40 +2,17 @@ import React, { Component } from 'react';
 import { FormGroup, Col, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 
 export class Filters extends Component {
-  state = {
-    query: {
-      'subNumber=': 0,
-      'registered=': true
-    }
-  }
-  componentDidMount() {
-    this.updateString(this.state.query)
-  }
-  componentDidUpdate(prevProps, prevState) {
-    const stateUpdated = prevState!==this.state
-    if (stateUpdated) {
-      this.updateString(this.state.query)
-    }
-  }
   updateQuery = (param, op, event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value.trim().split(' ').join('+')
-    const query = {...this.state.query}
+    const query = {...this.props.query}
     query[`${param}${op}`] = value
     if (value==='') {
       delete(query[`${param}${op}`])
     }
-    this.setState({query})
-  }
-  stringify = (query) => {
-    return Object.keys(query)
-    .map(k => `${k}${query[k]}`)
-    .join('&')
-  }
-  updateString = (query) => {
-    const filterString = this.stringify(query)
-    this.props.onChange(filterString)
+    this.props.onChange(query)
   }
   render() {
+    const {query} = this.props
     return (
       <div className="query-box filter-form">
         <h3 className="text-center">Filters</h3>
@@ -44,7 +21,7 @@ export class Filters extends Component {
             Search terms
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. NHS London" onChange={this.updateQuery.bind(null, 'search', '=')} />
+            <FormControl type="text" placeholder="E.g. NHS London" defaultValue={query['search=']} onChange={this.updateQuery.bind(null, 'search', '=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -52,7 +29,7 @@ export class Filters extends Component {
             Minimum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" onChange={this.updateQuery.bind(null, 'mainCharity.income', '>=')} />
+            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['mainCharity.income>=']} onChange={this.updateQuery.bind(null, 'mainCharity.income', '>=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -60,7 +37,7 @@ export class Filters extends Component {
             Maximum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 17000" onChange={this.updateQuery.bind(null, 'mainCharity.income', '<=')} />
+            <FormControl type="text" placeholder="E.g. 17000" defaultValue={query['mainCharity.income<=']} onChange={this.updateQuery.bind(null, 'mainCharity.income', '<=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -68,7 +45,7 @@ export class Filters extends Component {
             Charity Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 202918" onChange={this.updateQuery.bind(null, 'charityNumber', '=')} />
+            <FormControl type="text" placeholder="E.g. 202918" defaultValue={query['charityNumber=']} onChange={this.updateQuery.bind(null, 'charityNumber', '=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -76,12 +53,12 @@ export class Filters extends Component {
             Subsidiary Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" defaultValue={this.state.query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber', '=')} />
+            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber', '=')} />
           </Col>
         </FormGroup>
         <FormGroup>
           <Col smOffset={6} sm={6}>
-            <Checkbox defaultChecked={this.state.query['registered=']} onChange={this.updateQuery.bind(null, 'registered', '=')} >Registered / De-registered</Checkbox>
+            <Checkbox defaultChecked={query['registered=']} onChange={this.updateQuery.bind(null, 'registered', '=')} >Registered / De-registered</Checkbox>
           </Col>
         </FormGroup>
       </div>
@@ -90,5 +67,6 @@ export class Filters extends Component {
 }
 
 Filters.propTypes = {
+  query: React.PropTypes.object,
   onChange: React.PropTypes.func
 }

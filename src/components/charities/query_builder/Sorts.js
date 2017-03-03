@@ -7,22 +7,9 @@ const sorts = [
 ]
 
 export class Sorts extends Component {
-  state = {
-    sortField: 'charityNumber',
-    reverse: false
-  }
-  componentDidMount() {
-    this.updateString(this.state.sortField, this.state.reverse)
-  }
-  componentDidUpdate(prevProps, prevState) {
-    const stateUpdated = prevState!==this.state
-    if (stateUpdated) {
-      this.updateString(this.state.sortField, this.state.reverse)
-    }
-  }
-  updateString = (field, reverse) => {
-    const sortString = field===null ? '' : reverse ? `sort=-${field}` : `sort=${field}`
-    this.props.onChange(sortString)
+  updateQuery = newKeyValues => {
+    const query = {...this.props.query, ...newKeyValues}
+    return this.props.onChange(query)
   }
   render() {
     return (
@@ -34,8 +21,8 @@ export class Sorts extends Component {
               <Col key={i} xs={12}>
                 <Radio
                 name="sortingRadios"
-                defaultChecked={this.state.sortField===s.field}
-                onChange={() => this.setState({sortField: s.field})}
+                defaultChecked={this.props.query.sortField===s.field}
+                onChange={e => this.updateQuery({sortField: s.field})}
                 >
                   {s.name}
                 </Radio>
@@ -46,8 +33,8 @@ export class Sorts extends Component {
         <FormGroup>
           <Col xs={12}>
             <Checkbox
-            defaultChecked={this.state.reverse}
-            onChange={e => this.setState({reverse: e.target.checked})}
+            defaultChecked={this.props.query.reverse}
+            onChange={e => this.updateQuery({reverse: e.target.checked})}
             >
               Descending
             </Checkbox>
@@ -59,5 +46,6 @@ export class Sorts extends Component {
 }
 
 Sorts.propTpes = {
+  query: React.PropTypes.object,
   onChange: React.PropTypes.func
 }

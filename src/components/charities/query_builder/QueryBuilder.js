@@ -8,25 +8,89 @@ import { Pages } from './Pages';
 export class QueryBuilder extends Component {
   state = {
     open: true,
-    selectedName: 'Filters'
+    selectedName: 'Filters',
+    query: {
+      filter: {
+        'subNumber=': 0,
+        'registered=': true
+      },
+      projection: {
+        fields: {
+          mainCharity: true
+        }
+      },
+      sort: {
+        sortField: 'charityNumber',
+        reverse: false
+      },
+      page: {
+        countResults: false,
+        limit: 10,
+        skip: 0
+      }
+    }
+  }
+  componentDidMount() {
+    this.props.onFilterChange(this.filterString(this.state.query.filter))
+    this.props.onProjectionChange(this.projectionString(this.state.query.projection))
+    this.props.onSortChange(this.sortString(this.state.query.sort))
+    this.props.onPageChange(this.pageString(this.state.query.page))
   }
   queryTypes = [
-    {name: 'Filters', className: 'filter-query'},
-    {name: 'Projections', className: 'projection-query'},
-    {name: 'Sorting', className: 'sort-query'},
-    {name: 'Pagination', className: 'page-query'},
+    {name: 'Filters', className: 'filter-query filter-nav'},
+    {name: 'Projections', className: 'projection-query projection-nav'},
+    {name: 'Sorting', className: 'sort-query sort-nav'},
+    {name: 'Pagination', className: 'page-query page-nav'},
   ]
+  filterString = query => {
+    return Object.keys(query)
+    .map(k => `${k}${query[k]}`)
+    .join('&')
+  }
+  updateFilterState = query => {
+    this.setState({query: {...this.state.query, filter: query}})
+    const filterString = this.filterString(query)
+    this.props.onFilterChange(filterString)
+  }
+  projectionString = query => {
+    const commaSeparated = Object.keys(query.fields).join(',')
+    return commaSeparated ? `fields=${commaSeparated}` : ''
+  }
+  updateProjectionState = query => {
+    this.setState({query: {...this.state.query, projection: query}})
+    const projectionString = this.projectionString(query)
+    this.props.onProjectionChange(projectionString)
+  }
+  sortString = ({sortField, reverse}) => {
+    return sortField===null ? '' : reverse ? `sort=-${sortField}` : `sort=${sortField}`
+  }
+  updateSortState = query => {
+    this.setState({query: {...this.state.query, sort: query}})
+    const sortString = this.sortString(query)
+    this.props.onSortChange(sortString)
+  }
+  pageString = ({limit, skip, countResults}) => {
+    const pageArray = []
+    if (typeof limit === 'number') pageArray.push(`limit=${limit}`)
+    if (typeof skip === 'number') pageArray.push(`skip=${skip}`)
+    if (countResults) pageArray.push(`countResults`)
+    return pageArray.join('&')
+  }
+  updatePageState = query => {
+    this.setState({query: {...this.state.query, page: query}})
+    const pageString = this.pageString(query)
+    this.props.onPageChange(pageString)
+  }
   queryComponent = (componentName) => {
-    const { onFilterChange, onProjectionChange, onSortChange, onPageChange } = this.props
     switch(componentName) {
       case 'Filters':
-        return <Filters onChange={onFilterChange} />
+        return <Filters query={this.state.query.filter} onChange={this.updateFilterState} />
       case 'Projections':
-        return <Projections onChange={onProjectionChange} />
+        return <Projections query={this.state.query.projection} onChange={this.updateProjectionState} />
       case 'Sorting':
-        return <Sorts onChange={onSortChange} />
+        return <Sorts query={this.state.query.sort} onChange={this.updateSortState} />
       case 'Pagination':
-        return <Pages onChange={onPageChange} />
+        return <Pages query={this.state.query.page} onChange={this.updatePageState} />
       default: return
     }
   }

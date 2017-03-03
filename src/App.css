@@ -102,6 +102,52 @@
 }
 
 
+.filter-nav,
+.projection-nav,
+.sort-nav,
+.page-nav {
+  border-width: 1px;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+li > a.filter-nav:hover,
+li.active > a.filter-nav,
+li.active > a.filter-nav:hover,
+li.active > a.filter-nav:focus {
+  border-color: #FF8A80;
+  color: #FF8A80;
+  background: none;
+}
+
+li > a.projection-nav:hover,
+li.active > a.projection-nav,
+li.active > a.projection-nav:hover,
+li.active > a.projection-nav:focus {
+  border-color: #B9F6CA;
+  color: #B9F6CA;
+  background: none;
+}
+
+li > a.sort-nav:hover,
+li.active > a.sort-nav,
+li.active > a.sort-nav:hover,
+li.active > a.sort-nav:focus {
+  border-color: #B2EBF2;
+  color: #B2EBF2;
+  background: none;
+}
+
+li > a.page-nav:hover,
+li.active > a.page-nav,
+li.active > a.page-nav:hover,
+li.active > a.page-nav:focus {
+  border-color: #FFFF8D;
+  color: #FFFF8D;
+  background: none;
+}
+
 
 .query-response {
   min-height: 400px;

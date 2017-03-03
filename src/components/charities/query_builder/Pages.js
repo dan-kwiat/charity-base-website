@@ -2,25 +2,39 @@ import React, {Component} from 'react';
 import { Row, Col, FormGroup, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
 
 export class Pages extends Component {
-  state = {
-    countResults: false,
-    limit: 10,
-    skip: 0
+  pageNumber = (limit, skip) => {
+    return (1 + (skip || 0)/(limit || 10))
   }
-  componentDidMount() {
-    this.updateString(this.state.countResults, this.state.limit, this.state.skip)
+  skip = (limit, pageNumber) => {
+    return ((limit || 10) * ((pageNumber || 1) - 1))
   }
-  componentDidUpdate(prevProps, prevState) {
-    const stateUpdated = prevState!==this.state
-    if (stateUpdated) {
-      this.updateString(this.state.countResults, this.state.limit, this.state.skip)
+  updateSkipLimit = (e) => {
+    const {limit, skip} = this.props.query
+    const pageNumber = this.pageNumber(limit, skip)
+    const newLimit = Number(e.target.value)
+    const newSkip = this.skip(newLimit, pageNumber)
+    this.updateQuery({limit: newLimit, skip: newSkip})
+  }
+  updateSkip = (e) => {
+    const skip = this.skip(this.props.query.limit, Number(e.target.value))
+    this.updateQuery({skip})
+  }
+  removeEmptyValues = (obj) => {
+    const nonEmptyValues = {}
+    for (var k in obj) {
+      if (obj.hasOwnProperty(k) && obj[k]!=='') {
+        nonEmptyValues[k] = obj[k]
+      }
     }
+    return nonEmptyValues
   }
-  updateString = (countResults, limit, skip) => {
-    const pageString = `limit=${limit}&skip=${skip}` + (countResults ? '&countResults' : '')
-    this.props.onChange(pageString)
+  updateQuery = (newKeyValues) => {
+    const query = {...this.props.query, ...newKeyValues}
+    const pruned = this.removeEmptyValues(query)
+    return this.props.onChange(pruned)
   }
   render() {
+    const {limit, skip, countResults} = this.props.query
     return (
       <div className="query-box page-form">
         <h3 className="text-center">Pagination</h3>
@@ -36,8 +50,8 @@ export class Pages extends Component {
                 min="1"
                 max="50"
                 placeholder="E.g. 10"
-                defaultValue={this.state.limit}
-                onChange={e => this.setState({limit: e.target.value})}
+                defaultValue={limit}
+                onChange={this.updateSkipLimit}
                 />
               </Col>
             </FormGroup>
@@ -52,8 +66,8 @@ export class Pages extends Component {
                 type="number"
                 min="1"
                 placeholder="E.g. 1"
-                defaultValue={1 + this.state.skip/10}
-                onChange={e => this.setState({skip: this.state.limit*(e.target.value-1)})}
+                defaultValue={this.pageNumber(limit, skip)}
+                onChange={this.updateSkip}
                 />
               </Col>
             </FormGroup>
@@ -62,8 +76,8 @@ export class Pages extends Component {
         <FormGroup>
           <Col xs={12} className="text-center">
             <Checkbox
-            defaultChecked={this.state.countResults}
-            onChange={e => this.setState({countResults: e.target.checked})}
+            defaultChecked={countResults}
+            onChange={e => this.updateQuery({countResults: e.target.checked})}
             >
               Count Results
             </Checkbox>
@@ -75,5 +89,6 @@ export class Pages extends Component {
 }
 
 Pages.propTpes = {
+  query: React.PropTypes.object,
   onChange: React.PropTypes.func
 }

@@ -22,34 +22,20 @@ const projections = [
 
 
 export class Projections extends Component {
-  state = {
-    fields: {
-      mainCharity: true
+  removeEmptyValues = (obj) => {
+    const nonEmptyValues = {}
+    for (var k in obj) {
+      if (obj.hasOwnProperty(k) && obj[k]!=='') {
+        nonEmptyValues[k] = obj[k]
+      }
     }
+    return nonEmptyValues
   }
-  componentDidMount() {
-    this.updateString(this.state.fields)
-  }
-  componentDidUpdate(prevProps, prevState) {
-    const stateUpdated = prevState!==this.state
-    if (stateUpdated) {
-      this.updateString(this.state.fields)
-    }
-  }
-  updateFields = (field, event) => {
-    const checked = event.target.checked
-    const fields = this.state.fields
-    if (checked) {
-      fields[field] = checked
-    } else {
-      delete(fields[field])
-    }
-    this.setState({fields})
-  }
-  updateString = (fields) => {
-    const commaSeparated = Object.keys(fields).join(',')
-    const projectionString = commaSeparated ? `fields=${commaSeparated}` : ''
-    this.props.onChange(projectionString)
+  updateQuery = (field, event) => {
+    const fields = {...this.props.query.fields}
+    fields[field] = event.target.checked
+    const pruned = this.removeEmptyValues(fields)
+    return this.props.onChange({fields: pruned})
   }
   render() {
     return (
@@ -60,7 +46,7 @@ export class Projections extends Component {
             <Col key={i} sm={6} md={4} lg={3}>
               <FormGroup>
                 <Col xs={12}>
-                  <Checkbox defaultChecked={this.state.fields[p.field]} onChange={this.updateFields.bind(null, p.field)} >
+                  <Checkbox defaultChecked={this.props.query.fields[p.field]} onChange={this.updateQuery.bind(null, p.field)} >
                     {p.name}
                   </Checkbox>
                 </Col>
@@ -74,5 +60,6 @@ export class Projections extends Component {
 }
 
 Projections.propTypes = {
+  query: React.PropTypes.object,
   onChange: React.PropTypes.func
 }
