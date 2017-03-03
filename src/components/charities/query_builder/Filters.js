@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { FormGroup, Col, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 
 export class Filters extends Component {
-  updateQuery = (param, op, event) => {
+  updateQuery = (filterKey, event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value.trim().split(' ').join('+')
     const query = {...this.props.query}
-    query[`${param}${op}`] = value
+    query[`${filterKey}`] = value
     if (value==='') {
-      delete(query[`${param}${op}`])
+      delete(query[`${filterKey}`])
     }
     this.props.onChange(query)
   }
@@ -21,7 +21,7 @@ export class Filters extends Component {
             Search terms
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. NHS London" defaultValue={query['search=']} onChange={this.updateQuery.bind(null, 'search', '=')} />
+            <FormControl type="text" placeholder="E.g. NHS London" defaultValue={query['search=']} onChange={this.updateQuery.bind(null, 'search=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -29,7 +29,7 @@ export class Filters extends Component {
             Minimum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['mainCharity.income>=']} onChange={this.updateQuery.bind(null, 'mainCharity.income', '>=')} />
+            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['mainCharity.income>=']} onChange={this.updateQuery.bind(null, 'mainCharity.income>=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -37,7 +37,7 @@ export class Filters extends Component {
             Maximum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 17000" defaultValue={query['mainCharity.income<=']} onChange={this.updateQuery.bind(null, 'mainCharity.income', '<=')} />
+            <FormControl type="text" placeholder="E.g. 17000" defaultValue={query['mainCharity.income<=']} onChange={this.updateQuery.bind(null, 'mainCharity.income<=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -45,7 +45,7 @@ export class Filters extends Component {
             Charity Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 202918" defaultValue={query['charityNumber=']} onChange={this.updateQuery.bind(null, 'charityNumber', '=')} />
+            <FormControl type="text" placeholder="E.g. 202918" defaultValue={query['charityNumber=']} onChange={this.updateQuery.bind(null, 'charityNumber=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -53,12 +53,12 @@ export class Filters extends Component {
             Subsidiary Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber', '=')} />
+            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber=')} />
           </Col>
         </FormGroup>
         <FormGroup>
           <Col smOffset={6} sm={6}>
-            <Checkbox defaultChecked={query['registered=']} onChange={this.updateQuery.bind(null, 'registered', '=')} >Registered / De-registered</Checkbox>
+            <Checkbox defaultChecked={query['registered=']} onChange={this.updateQuery.bind(null, 'registered=')} >Registered / De-registered</Checkbox>
           </Col>
         </FormGroup>
       </div>
