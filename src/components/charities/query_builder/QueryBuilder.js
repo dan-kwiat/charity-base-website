@@ -105,7 +105,7 @@ export class QueryBuilder extends Component {
         </div>
         <Panel className="query-builder" collapsible expanded={this.state.open}>
           <Row>
-            <Col sm={4}>
+            <Col sm={3}>
               <ul className="nav nav-pills nav-stacked">
                 {this.queryTypes.map((q, i) => (
                   <li key={i} role="presentation" className={this.state.selectedName===q.name ? 'active' : ''}>
@@ -114,7 +114,7 @@ export class QueryBuilder extends Component {
                 ))}
               </ul>
             </Col>
-            <Col sm={8}>
+            <Col sm={9}>
               {this.queryComponent(this.state.selectedName)}
             </Col>
           </Row>

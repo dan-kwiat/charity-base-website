@@ -106,46 +106,55 @@
 .projection-nav,
 .sort-nav,
 .page-nav {
-  border-width: 1px;
-  border-radius: 4px;
+  text-align: center;
+  border-width: 0 0 0 1px;
   border-style: solid;
   border-color: transparent;
+  opacity: 0.5;
 }
 
 li > a.filter-nav:hover,
 li.active > a.filter-nav,
 li.active > a.filter-nav:hover,
 li.active > a.filter-nav:focus {
+  border-radius: 0;
   border-color: #FF8A80;
   color: #FF8A80;
   background: none;
+  opacity: 1;
 }
 
 li > a.projection-nav:hover,
 li.active > a.projection-nav,
 li.active > a.projection-nav:hover,
 li.active > a.projection-nav:focus {
+  border-radius: 0;
   border-color: #B9F6CA;
   color: #B9F6CA;
   background: none;
+  opacity: 1;
 }
 
 li > a.sort-nav:hover,
 li.active > a.sort-nav,
 li.active > a.sort-nav:hover,
 li.active > a.sort-nav:focus {
+  border-radius: 0;
   border-color: #B2EBF2;
   color: #B2EBF2;
   background: none;
+  opacity: 1;
 }
 
 li > a.page-nav:hover,
 li.active > a.page-nav,
 li.active > a.page-nav:hover,
 li.active > a.page-nav:focus {
+  border-radius: 0;
   border-color: #FFFF8D;
   color: #FFFF8D;
   background: none;
+  opacity: 1;
 }
 
 
