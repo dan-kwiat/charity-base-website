@@ -2,11 +2,7 @@ import React from 'react';
 import { Row, Col, Button, Popover } from 'react-bootstrap';
 
 const RequestPrompt = () => (
-  <Popover
-  id="popover-positioned-left"
-  placement="bottom"
-  positionTop={60}
-  >
+  <Popover id="popover-positioned-left" className='prompt-refresh' placement="bottom" positionTop={60}>
     Click <strong>GET</strong> to update response
   </Popover>
 )
@@ -16,7 +12,11 @@ export const Request = ({queryStringsArray, outDated}) => {
   return (
     <div style={{paddingTop: '30px', paddingBottom: '30px'}}>
       <Row>
-        <Col sm={10}>
+        <Col sm={3}>
+          <Button className="request-button" type="submit" bsStyle="default" bsSize="large" block>GET</Button>
+          {outDated ? <RequestPrompt /> : ''}
+        </Col>
+        <Col sm={9}>
           <pre className="query-string">
             <span className="default-query">https://charitybase.uk/api/v0.2.0/charities/?</span>
             {queryStringsArray.map((q, i) => (
@@ -26,10 +26,6 @@ export const Request = ({queryStringsArray, outDated}) => {
               </span>
             ))}
           </pre>
-        </Col>
-        <Col sm={2} className="text-right">
-          <Button className="request-button" type="submit" bsStyle="default" bsSize="large" block>GET</Button>
-          {outDated ? <RequestPrompt /> : ''}
         </Col>
       </Row>
     </div>

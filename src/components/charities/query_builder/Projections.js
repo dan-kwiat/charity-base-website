@@ -29,7 +29,7 @@ export class Projections extends Component {
   ]
   render() {
     return (
-      <div>
+      <div className='query-form-container'>
         <p>Choose which fields are returned:</p>
         <div className="query-box projection-form">
           <Row>

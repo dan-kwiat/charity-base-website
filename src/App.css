@@ -43,8 +43,12 @@
   color: #BBB;
 }
 
+.query-form-container {
+  min-height: 265px;
+}
+
 .query-nav {
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .query-box {
@@ -164,6 +168,11 @@ li.active > a.page-nav:focus {
   color: #FFFF8D;
   background: none;
   opacity: 1;
+}
+
+
+.prompt-refresh {
+  color: #000;
 }
 
 

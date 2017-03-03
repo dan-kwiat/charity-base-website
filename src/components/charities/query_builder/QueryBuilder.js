@@ -105,7 +105,7 @@ export class QueryBuilder extends Component {
         </div>
         <Panel className="query-builder" collapsible expanded={this.state.open}>
           <Form horizontal onSubmit={this.props.onFormSubmit}>
-            <Row>
+            <Row className="query-form-container">
               <Col sm={3}>
                 <ul className="nav nav-pills nav-stacked query-nav">
                   {this.queryTypes.map((q, i) => (

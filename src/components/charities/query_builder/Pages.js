@@ -29,7 +29,7 @@ export class Pages extends Component {
   render() {
     const {limit, skip, countResults} = this.props.query
     return (
-      <div>
+      <div className='query-form-container'>
         <p>Set the response page size and page number:</p>
         <div className="query-box page-form">
           <Row>

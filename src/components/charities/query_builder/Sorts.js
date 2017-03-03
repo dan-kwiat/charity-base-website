@@ -13,8 +13,8 @@ export class Sorts extends Component {
   ]
   render() {
     return (
-      <div>
-        <p>Choose which fields to sort by:</p>
+      <div className='query-form-container'>
+        <p>Choose which field to sort by:</p>
         <div className="query-box sort-form">
           <FormGroup>
             {this.sorts.map((s, i) => {
