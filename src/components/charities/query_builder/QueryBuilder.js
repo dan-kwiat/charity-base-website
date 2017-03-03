@@ -107,7 +107,7 @@ export class QueryBuilder extends Component {
           <Form horizontal onSubmit={this.props.onFormSubmit}>
             <Row>
               <Col sm={3}>
-                <ul className="nav nav-pills nav-stacked">
+                <ul className="nav nav-pills nav-stacked query-nav">
                   {this.queryTypes.map((q, i) => (
                     <li key={i} role="presentation" className={this.state.selectedName===q.name ? 'active' : ''}>
                       <a className={q.className} role="button" onClick={()=>this.setState({selectedName: q.name})}>{q.name}</a>

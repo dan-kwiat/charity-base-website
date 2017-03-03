@@ -29,20 +29,23 @@ export class Projections extends Component {
   ]
   render() {
     return (
-      <div className="query-box projection-form">
-        <Row>
-          {this.projections.map((p, i) => (
-            <Col key={i} sm={6} md={4} lg={3}>
-              <FormGroup>
-                <Col xs={12}>
-                  <Checkbox defaultChecked={this.props.query.fields[p.field]} onChange={this.updateQuery.bind(null, p.field)} >
-                    {p.name}
-                  </Checkbox>
-                </Col>
-              </FormGroup>
-            </Col>
-          ))}
-        </Row>
+      <div>
+        <p>Choose which fields are returned:</p>
+        <div className="query-box projection-form">
+          <Row>
+            {this.projections.map((p, i) => (
+              <Col key={i} sm={6} md={4} lg={3}>
+                <FormGroup>
+                  <Col xs={12}>
+                    <Checkbox defaultChecked={this.props.query.fields[p.field]} onChange={this.updateQuery.bind(null, p.field)} >
+                      {p.name}
+                    </Checkbox>
+                  </Col>
+                </FormGroup>
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
     )
   }

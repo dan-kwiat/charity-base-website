@@ -21,28 +21,31 @@ export class Filters extends Component {
   render() {
     const {query} = this.props
     return (
-      <div className="query-box filter-form">
-        <Row>
-          {this.inputs.map((x, j) => (
-            <Col key={j} sm={6}>
-              <FormGroup key={j}>
-                <Col componentClass={ControlLabel} sm={6}>
-                  {x.name}
-                </Col>
-                <Col sm={6}>
-                  <FormControl type={x.type} min={x.min} placeholder={x.placeHolder} defaultValue={query[x.key]} onChange={this.updateQuery.bind(null, x.key)} />
+      <div>
+        <p>Narrow down the list of returned charities:</p>
+        <div className="query-box filter-form">
+          <Row>
+            {this.inputs.map((x, j) => (
+              <Col key={j} sm={6}>
+                <FormGroup key={j}>
+                  <Col componentClass={ControlLabel} sm={6}>
+                    {x.name}
+                  </Col>
+                  <Col sm={6}>
+                    <FormControl type={x.type} min={x.min} placeholder={x.placeHolder} defaultValue={query[x.key]} onChange={this.updateQuery.bind(null, x.key)} />
+                  </Col>
+                </FormGroup>
+              </Col>
+            ))}
+            <Col sm={6}>
+              <FormGroup>
+                <Col xs={12} className="text-center">
+                  <Checkbox defaultChecked={query['registered=']} onChange={this.updateQuery.bind(null, 'registered=')} >Registered / De-registered</Checkbox>
                 </Col>
               </FormGroup>
             </Col>
-          ))}
-          <Col sm={6}>
-            <FormGroup>
-              <Col xs={12} className="text-center">
-                <Checkbox defaultChecked={query['registered=']} onChange={this.updateQuery.bind(null, 'registered=')} >Registered / De-registered</Checkbox>
-              </Col>
-            </FormGroup>
-          </Col>
-        </Row>
+          </Row>
+        </div>
       </div>
     )
   }

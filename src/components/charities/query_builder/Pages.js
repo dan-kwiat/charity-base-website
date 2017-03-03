@@ -29,52 +29,55 @@ export class Pages extends Component {
   render() {
     const {limit, skip, countResults} = this.props.query
     return (
-      <div className="query-box page-form">
-        <Row>
-          <Col sm={6}>
-            <FormGroup>
-              <Col componentClass={ControlLabel} xs={6}>
-                Results per Page
-              </Col>
-              <Col xs={6}>
-                <FormControl
-                type="number"
-                min="1"
-                max="50"
-                placeholder="E.g. 10"
-                defaultValue={limit}
-                onChange={this.updateSkipLimit}
-                />
-              </Col>
-            </FormGroup>
-          </Col>
-          <Col sm={6}>
-            <FormGroup>
-              <Col componentClass={ControlLabel} xs={6}>
-                Page Number
-              </Col>
-              <Col xs={6}>
-                <FormControl
-                type="number"
-                min="1"
-                placeholder="E.g. 1"
-                defaultValue={this.pageNumber(limit, skip)}
-                onChange={this.updateSkip}
-                />
-              </Col>
-            </FormGroup>
-          </Col>
-        </Row>
-        <FormGroup>
-          <Col xs={12} className="text-center">
-            <Checkbox
-            defaultChecked={countResults}
-            onChange={e => this.updateQuery({countResults: e.target.checked})}
-            >
-              Count Results
-            </Checkbox>
-          </Col>
-        </FormGroup>
+      <div>
+        <p>Set the response page size and page number:</p>
+        <div className="query-box page-form">
+          <Row>
+            <Col sm={6}>
+              <FormGroup>
+                <Col componentClass={ControlLabel} xs={6}>
+                  Results per Page
+                </Col>
+                <Col xs={6}>
+                  <FormControl
+                  type="number"
+                  min="1"
+                  max="50"
+                  placeholder="E.g. 10"
+                  defaultValue={limit}
+                  onChange={this.updateSkipLimit}
+                  />
+                </Col>
+              </FormGroup>
+            </Col>
+            <Col sm={6}>
+              <FormGroup>
+                <Col componentClass={ControlLabel} xs={6}>
+                  Page Number
+                </Col>
+                <Col xs={6}>
+                  <FormControl
+                  type="number"
+                  min="1"
+                  placeholder="E.g. 1"
+                  defaultValue={this.pageNumber(limit, skip)}
+                  onChange={this.updateSkip}
+                  />
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+          <FormGroup>
+            <Col xs={12} className="text-center">
+              <Checkbox
+              defaultChecked={countResults}
+              onChange={e => this.updateQuery({countResults: e.target.checked})}
+              >
+                Count Results
+              </Checkbox>
+            </Col>
+          </FormGroup>
+        </div>
       </div>
     )
   }
