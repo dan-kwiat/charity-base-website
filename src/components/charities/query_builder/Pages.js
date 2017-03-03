@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Row, Col, FormGroup, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
 import { removeByValue } from '../../../lib/queryBuilderHelpers';
 
+
 export class Pages extends Component {
   pageNumber = (limit, skip) => {
     return (1 + (skip || 0)/(limit || 10))

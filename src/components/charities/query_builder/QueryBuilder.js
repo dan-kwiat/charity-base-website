@@ -5,6 +5,7 @@ import { Projections } from './Projections';
 import { Sorts } from './Sorts';
 import { Pages } from './Pages';
 
+
 export class QueryBuilder extends Component {
   state = {
     open: true,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, Col, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 import { removeByValue } from '../../../lib/queryBuilderHelpers';
 
+
 export class Filters extends Component {
   updateQuery = (filterKey, event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value.trim().split(' ').join('+')

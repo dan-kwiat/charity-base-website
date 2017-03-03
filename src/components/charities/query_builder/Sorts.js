@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import { Col, FormGroup, Radio, Checkbox } from 'react-bootstrap';
 
-const sorts = [
-  {name: 'Charity Number', field: 'charityNumber'},
-  {name: 'Gross Income', field: 'mainCharity.income'}
-]
 
 export class Sorts extends Component {
   updateQuery = newKeyValues => {
     const query = {...this.props.query, ...newKeyValues}
     return this.props.onChange(query)
   }
+  sorts = [
+    {name: 'Charity Number', field: 'charityNumber'},
+    {name: 'Gross Income', field: 'mainCharity.income'}
+  ]
   render() {
     return (
       <div className="query-box sort-form">
         <FormGroup>
-          {sorts.map((s, i) => {
+          {this.sorts.map((s, i) => {
             return (
               <Col key={i} xs={12}>
                 <Radio
