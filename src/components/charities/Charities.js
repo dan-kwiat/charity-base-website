@@ -14,7 +14,6 @@ export class Charities extends Component {
       sort: '',
       page: ''
     },
-    queryStringsArray: [],
     queryUpdated: false,
     loading: false,
     numRequests: 0,
@@ -36,24 +35,22 @@ export class Charities extends Component {
   }
   onFormSubmit = event => {
     event.preventDefault()
-    this.requestCharities(this.state.queryStringsArray)
+    this.requestCharities(this.queryStringsArray())
   }
   updateQuery = (queryType, value) => {
     this.setState((prevState) => {
       const queryStrings = {...prevState.queryStrings}
       queryStrings[queryType] = value
-      const queryStringsArray = this.objToArray(queryStrings)
       return {
         queryStrings,
-        queryStringsArray,
         queryUpdated: true
       }
     })
   }
-  objToArray = queryStrings => {
-    const queryTypes = Object.keys(queryStrings)
+  queryStringsArray = () => {
+    const queryTypes = Object.keys(this.state.queryStrings)
     const queryArray = queryTypes.reduce((acc, queryType) => {
-      const queryString = queryStrings[queryType]
+      const queryString = this.state.queryStrings[queryType]
       return queryString==='' ? acc : [...acc, {queryType, queryString}]
     }, [])
     return queryArray
@@ -78,7 +75,7 @@ export class Charities extends Component {
           onPageChange={this.updateQuery.bind(null, 'page')}
           />
           <Request
-          queryStringsArray={this.state.queryStringsArray}
+          queryStringsArray={this.queryStringsArray()}
           outDated={this.state.queryUpdated}
           />
         </Form>
