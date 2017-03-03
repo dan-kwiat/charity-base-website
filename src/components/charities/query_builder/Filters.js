@@ -29,7 +29,7 @@ export class Filters extends Component {
             Minimum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['mainCharity.income>=']} onChange={this.updateQuery.bind(null, 'mainCharity.income>=')} />
+            <FormControl type="number" placeholder="E.g. 0" defaultValue={query['mainCharity.income>=']} onChange={this.updateQuery.bind(null, 'mainCharity.income>=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -37,7 +37,7 @@ export class Filters extends Component {
             Maximum Gross Income
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 17000" defaultValue={query['mainCharity.income<=']} onChange={this.updateQuery.bind(null, 'mainCharity.income<=')} />
+            <FormControl type="number" placeholder="E.g. 17000" defaultValue={query['mainCharity.income<=']} onChange={this.updateQuery.bind(null, 'mainCharity.income<=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -45,7 +45,7 @@ export class Filters extends Component {
             Charity Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 202918" defaultValue={query['charityNumber=']} onChange={this.updateQuery.bind(null, 'charityNumber=')} />
+            <FormControl type="number" min={200000} placeholder="E.g. 202918" defaultValue={query['charityNumber=']} onChange={this.updateQuery.bind(null, 'charityNumber=')} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -53,7 +53,7 @@ export class Filters extends Component {
             Subsidiary Number
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="E.g. 0" defaultValue={query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber=')} />
+            <FormControl type="number" min={0} placeholder="E.g. 0" defaultValue={query['subNumber=']} onChange={this.updateQuery.bind(null, 'subNumber=')} />
           </Col>
         </FormGroup>
         <FormGroup>
