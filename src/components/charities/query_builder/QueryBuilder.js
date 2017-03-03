@@ -5,13 +5,32 @@ import { Projections } from './Projections';
 import { Sorts } from './Sorts';
 import { Pages } from './Pages';
 
-
 export class QueryBuilder extends Component {
   state = {
-    open: true
+    open: true,
+    selectedName: 'Filters'
+  }
+  queryTypes = [
+    {name: 'Filters', className: 'filter-query'},
+    {name: 'Projections', className: 'projection-query'},
+    {name: 'Sorting', className: 'sort-query'},
+    {name: 'Pagination', className: 'page-query'},
+  ]
+  queryComponent = (componentName) => {
+    const { onFilterChange, onProjectionChange, onSortChange, onPageChange } = this.props
+    switch(componentName) {
+      case 'Filters':
+        return <Filters onChange={onFilterChange} />
+      case 'Projections':
+        return <Projections onChange={onProjectionChange} />
+      case 'Sorting':
+        return <Sorts onChange={onSortChange} />
+      case 'Pagination':
+        return <Pages onChange={onPageChange} />
+      default: return
+    }
   }
   render() {
-    const { onFilterChange, onProjectionChange, onSortChange, onPageChange } = this.props
     return (
       <div>
         <div className="text-right">
@@ -19,13 +38,19 @@ export class QueryBuilder extends Component {
             {this.state.open ? 'Hide Query Builder' : 'Show Query Builder'}
           </Button>
         </div>
-        <Panel collapsible expanded={this.state.open}>
+        <Panel className="query-builder" collapsible expanded={this.state.open}>
           <Row>
-            <Col sm={6}><Filters onChange={onFilterChange} /></Col>
-            <Col sm={3}><Projections onChange={onProjectionChange} /></Col>
-            <Col sm={3}>
-              <Sorts onChange={onSortChange} />
-              <Pages onChange={onPageChange} />
+            <Col sm={4}>
+              <ul className="nav nav-pills nav-stacked">
+                {this.queryTypes.map((q, i) => (
+                  <li key={i} role="presentation" className={this.state.selectedName===q.name ? 'active' : ''}>
+                    <a className={q.className} role="button" onClick={()=>this.setState({selectedName: q.name})}>{q.name}</a>
+                  </li>
+                ))}
+              </ul>
+            </Col>
+            <Col sm={8}>
+              {this.queryComponent(this.state.selectedName)}
             </Col>
           </Row>
         </Panel>
