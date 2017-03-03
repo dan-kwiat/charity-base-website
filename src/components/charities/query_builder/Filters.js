@@ -21,7 +21,6 @@ export class Filters extends Component {
     const {query} = this.props
     return (
       <div className="query-box filter-form">
-        <h3 className="text-center">Filters</h3>
         {this.inputs.map((x, j) => (
           <FormGroup key={j}>
             <Col componentClass={ControlLabel} sm={6}>

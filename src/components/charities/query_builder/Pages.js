@@ -29,7 +29,6 @@ export class Pages extends Component {
     const {limit, skip, countResults} = this.props.query
     return (
       <div className="query-box page-form">
-        <h3 className="text-center">Pagination</h3>
         <Row>
           <Col sm={6}>
             <FormGroup>

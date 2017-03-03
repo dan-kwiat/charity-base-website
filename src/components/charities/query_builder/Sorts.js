@@ -14,7 +14,6 @@ export class Sorts extends Component {
   render() {
     return (
       <div className="query-box sort-form">
-        <h3 className="text-center">Sorting</h3>
         <FormGroup>
           {sorts.map((s, i) => {
             return (

@@ -31,7 +31,6 @@ export class Projections extends Component {
   render() {
     return (
       <div className="query-box projection-form">
-        <h3 className="text-center">Projections</h3>
         <Row>
           {projections.map((p, i) => (
             <Col key={i} sm={6} md={4} lg={3}>
