@@ -43,37 +43,30 @@
 }
 
 .query-box {
-  background-color: #FFF;
-  border-color: #DDD;
   border-style: solid;
   border-radius: 4px;
   border-width: 1px;
   padding: 10px;
-  overflow-y: auto;
 }
 
 .filter-form {
   border-color: #FF8A80;
   background-color: #FF8A80;
-  height: 400px;
 }
 
 .projection-form {
   border-color: #B9F6CA;
   background-color: #B9F6CA;
-  height: 400px;
 }
 
 .sort-form {
   border-color: #B2EBF2;
   background-color: #B2EBF2;
-  height: 175px;
 }
 
 .page-form {
   border-color: #FFFF8D;
   background-color: #FFFF8D;
-  height: 225px;
 }
 
 .query-string {
