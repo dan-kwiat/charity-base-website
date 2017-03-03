@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormGroup, Row, Col, Checkbox } from 'react-bootstrap';
-
+import { removeByValue } from '../../../lib/queryBuilderHelpers';
 
 const projections = [
   {name: 'Main Info', field: 'mainCharity'},
@@ -22,19 +22,10 @@ const projections = [
 
 
 export class Projections extends Component {
-  removeEmptyValues = (obj) => {
-    const nonEmptyValues = {}
-    for (var k in obj) {
-      if (obj.hasOwnProperty(k) && obj[k]!=='') {
-        nonEmptyValues[k] = obj[k]
-      }
-    }
-    return nonEmptyValues
-  }
   updateQuery = (field, event) => {
     const fields = {...this.props.query.fields}
     fields[field] = event.target.checked
-    const pruned = this.removeEmptyValues(fields)
+    const pruned = removeByValue(fields, false)
     return this.props.onChange({fields: pruned})
   }
   render() {

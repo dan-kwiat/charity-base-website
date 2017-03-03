@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Row, Col, FormGroup, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
+import { removeByValue } from '../../../lib/queryBuilderHelpers';
 
 export class Pages extends Component {
   pageNumber = (limit, skip) => {
@@ -19,18 +20,9 @@ export class Pages extends Component {
     const skip = this.skip(this.props.query.limit, Number(e.target.value))
     this.updateQuery({skip})
   }
-  removeEmptyValues = (obj) => {
-    const nonEmptyValues = {}
-    for (var k in obj) {
-      if (obj.hasOwnProperty(k) && obj[k]!=='') {
-        nonEmptyValues[k] = obj[k]
-      }
-    }
-    return nonEmptyValues
-  }
   updateQuery = (newKeyValues) => {
     const query = {...this.props.query, ...newKeyValues}
-    const pruned = this.removeEmptyValues(query)
+    const pruned = removeByValue(query, '')
     return this.props.onChange(pruned)
   }
   render() {
