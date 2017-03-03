@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+import { Form, Row, Col, Panel, Button } from 'react-bootstrap';
 import { Filters } from './Filters';
 import { Projections } from './Projections';
 import { Sorts } from './Sorts';
 import { Pages } from './Pages';
-
+import { Request } from './Request';
 
 export class QueryBuilder extends Component {
   state = {
@@ -104,20 +104,27 @@ export class QueryBuilder extends Component {
           </Button>
         </div>
         <Panel className="query-builder" collapsible expanded={this.state.open}>
-          <Row>
-            <Col sm={3}>
-              <ul className="nav nav-pills nav-stacked">
-                {this.queryTypes.map((q, i) => (
-                  <li key={i} role="presentation" className={this.state.selectedName===q.name ? 'active' : ''}>
-                    <a className={q.className} role="button" onClick={()=>this.setState({selectedName: q.name})}>{q.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </Col>
-            <Col sm={9}>
-              {this.queryComponent(this.state.selectedName)}
-            </Col>
-          </Row>
+          <Form horizontal onSubmit={this.props.onFormSubmit}>
+            <Row>
+              <Col sm={3}>
+                <ul className="nav nav-pills nav-stacked">
+                  {this.queryTypes.map((q, i) => (
+                    <li key={i} role="presentation" className={this.state.selectedName===q.name ? 'active' : ''}>
+                      <a className={q.className} role="button" onClick={()=>this.setState({selectedName: q.name})}>{q.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </Col>
+              <Col sm={9}>
+                {this.queryComponent(this.state.selectedName)}
+              </Col>
+            </Row>
+            <hr />
+            <Request
+            queryStringsArray={this.props.queryStringsArray}
+            outDated={this.props.outDated}
+            />
+          </Form>
         </Panel>
       </div>
     )
@@ -128,5 +135,8 @@ QueryBuilder.propTypes = {
   onFilterChange: React.PropTypes.func,
   onProjectionChange: React.PropTypes.func,
   onSortChange: React.PropTypes.func,
-  onPageChange: React.PropTypes.func
+  onPageChange: React.PropTypes.func,
+  queryStringsArray: React.PropTypes.array,
+  outDated: React.PropTypes.bool,
+  onFormSubmit: React.PropTypes.func
 }

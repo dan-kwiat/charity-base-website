@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
 import { QueryBuilder } from './query_builder/QueryBuilder';
-import { Request } from './Request';
 import { Response } from './Response';
 import { loadCharities } from '../../lib/charitiesService';
 
@@ -67,18 +65,15 @@ export class Charities extends Component {
     return (
       <div style={{paddingTop: '40px'}}>
         {this.renderDescription()}
-        <Form horizontal onSubmit={this.onFormSubmit}>
-          <QueryBuilder
-          onFilterChange={this.updateQuery.bind(null, 'filter')}
-          onProjectionChange={this.updateQuery.bind(null, 'projection')}
-          onSortChange={this.updateQuery.bind(null, 'sort')}
-          onPageChange={this.updateQuery.bind(null, 'page')}
-          />
-          <Request
-          queryStringsArray={this.queryStringsArray()}
-          outDated={this.state.queryUpdated}
-          />
-        </Form>
+        <QueryBuilder
+        onFilterChange={this.updateQuery.bind(null, 'filter')}
+        onProjectionChange={this.updateQuery.bind(null, 'projection')}
+        onSortChange={this.updateQuery.bind(null, 'sort')}
+        onPageChange={this.updateQuery.bind(null, 'page')}
+        queryStringsArray={this.queryStringsArray()}
+        outDated={this.state.queryUpdated}
+        onFormSubmit={this.onFormSubmit}
+        />
         <Response
         loading={this.state.loading}
         outDated={this.state.queryUpdated}
