@@ -15,11 +15,11 @@ export class Sorts extends Component {
     return (
       <div className='query-form-container'>
         <p>Choose which field to sort by:</p>
-        <div className="query-box sort-form">
+        <div className="query-box sort-form text-center">
           <FormGroup>
             {this.sorts.map((s, i) => {
               return (
-                <Col key={i} xs={12}>
+                <Col key={i} sm={6} md={4} lg={3}>
                   <Radio
                   name="sortingRadios"
                   defaultChecked={this.props.query.sortField===s.field}
@@ -31,8 +31,9 @@ export class Sorts extends Component {
               )
             })}
           </FormGroup>
+          <hr />
           <FormGroup>
-            <Col xs={12}>
+            <Col sm={6} md={4} lg={3}>
               <Checkbox
               defaultChecked={this.props.query.reverse}
               onChange={e => this.updateQuery({reverse: e.target.checked})}

@@ -31,7 +31,7 @@ export class Pages extends Component {
     return (
       <div className='query-form-container'>
         <p>Set the response page size and page number:</p>
-        <div className="query-box page-form">
+        <div className="query-box page-form text-center">
           <Row>
             <Col sm={6}>
               <FormGroup>
@@ -67,8 +67,9 @@ export class Pages extends Component {
               </FormGroup>
             </Col>
           </Row>
+          <hr />
           <FormGroup>
-            <Col xs={12} className="text-center">
+            <Col sm={6}>
               <Checkbox
               defaultChecked={countResults}
               onChange={e => this.updateQuery({countResults: e.target.checked})}
