@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Button, ButtonGroup, ListGroup, ListGroupItem, Badge } from 'react-bootstrap'
 
 
 const ResponseOverlay = () => <div className="response-overlay"></div>
@@ -16,19 +16,43 @@ ResponseJSON.propTypes = {
   jsonData: React.PropTypes.object
 }
 
+const Charity = ({c}) => (
+  <div>
+    <h4>
+      {c.name}
+      <small>
+        {c.registered
+          ? <span> <Badge className="projection-form">registered</Badge></span>
+          : <span> <Badge className="filter-form">de-registered</Badge></span>
+        }
+      </small>
+    </h4>
+    <h5>
+      Charity Number: {c.charityNumber}
+      <small>{c.subNumber>0 ? ` (subsidiary ${c.subNumber})` : ''}</small>
+    </h5>
+  </div>
+)
+
+Charity.propTypes = {
+  c: React.PropTypes.object
+}
 
 const ResponseHuman = ({loading, jsonData}) => (
   <div className="query-response">
     {loading ?
       'Requesting...'
       :
-      <ul className="list-group">
-
+      <ListGroup>
         {jsonData.charities.length>0
-          ? jsonData.charities.map((c, i) => <div key={i} className="list-group-item">{c.name}</div>)
+          ? jsonData.charities.map((c, i) => (
+              <ListGroupItem key={i}>
+                <Charity c={c} />
+              </ListGroupItem>
+            ))
           : "No results with requested filters."
         }
-      </ul>
+      </ListGroup>
     }
   </div>
 )
